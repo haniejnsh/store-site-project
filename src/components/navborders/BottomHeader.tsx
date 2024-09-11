@@ -3,7 +3,7 @@ import { LuMenu } from "react-icons/lu";
 
 export default function BottomHeader() {
   return (
-    <div className="w-full shadow-lg shadow-blue-50 border-b-[1px] border-blue-100">
+    <div className="w-full shadow-lg shadow-bl1 border-b-[1px] border-bl2">
     <div className="flex items-center w-[80%] mx-auto gap-10 py-3 text-gray-600">
       <div className="flex items-center gap-[5px] cursor-pointer hover:text-blue-300 transition">
         <LuMenu/>
