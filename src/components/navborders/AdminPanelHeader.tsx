@@ -1,4 +1,3 @@
-import { SlLogout } from "react-icons/sl"
 import logo from "../../assets/images/logo-hanie.jpeg"
 import { RiLogoutBoxLine } from "react-icons/ri"
 
