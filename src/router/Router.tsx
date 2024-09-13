@@ -1,18 +1,18 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
-import HomePage from "../pages/homePage/HomePage";
-import CategoryPage from "../pages/categoryPage/CategoryPage";
-import DetailsPage from "../pages/detailsPage/DatailsPage";
-import CartPage from "../pages/cartPage/CartPage";
-import ShippingPage from "../pages/shippingPage/ShippingPage";
-import ResultPage from "../pages/resultPage/ResultPage";
+import HomePage from "../pages/home-page/HomePage";
+import CategoryPage from "../pages/category-page/CategoryPage";
+import DetailsPage from "../pages/details-page/DatailsPage";
+import CartPage from "../pages/cart-page/CartPage";
+import ShippingPage from "../pages/shipping-page/ShippingPage";
+import ResultPage from "../pages/result-page/ResultPage";
 import AdminPanelLayout from "../layouts/AdminPanelLayout";
 import ProductsManagmentPage from "../pages/adminPanelPage/productsManagementPage/ProductsManagmentPage";
-import OrdersManagementPage from "../pages/adminPanelPage/ordersManagementPage/OrdersManagementPage";
-import InventoryManagementPage from "../pages/adminPanelPage/inventoryManagementPage/InventoryManagementPage";
-import UserLoginPage from "../pages/loginPage/UserLoginPage";
-import AdminLoginPage from "../pages/loginPage/AdminLoginPage";
-import RegisterPage from "../pages/registerPage/RegisterPage";
+import OrdersManagementPage from "../pages/adminPanelPage/orders-management-page/OrdersManagementPage";
+import InventoryManagementPage from "../pages/adminPanelPage/inventory-management-page/InventoryManagementPage";
+import UserLoginPage from "../pages/login-page/UserLoginPage";
+import AdminLoginPage from "../pages/login-page/AdminLoginPage";
+import RegisterPage from "../pages/register-page/RegisterPage";
 
 
 const routes: RouteObject[] = ([
