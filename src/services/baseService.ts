@@ -23,25 +23,25 @@ axios.interceptors.response.use(
         if(error.response.status==403 && originalReq.url==AUTH_URL.refresh){
             return Promise.reject(error)
         }
-        if(!originalReq._retry){
-            originalReq._retry=true
-            const refToken: { refresh: string | null }={refresh:localStorage.getItem("refresh")}
-            try{
-                const refreshRes = await axios.post(
-                    "http://localhost:8000/api/auth/token",
-                    {
-                        refreshToken: refToken,
-                    }
-                  );
-                  localStorage.setItem("access",refreshRes.data.access);
-                // await store.dispatch(refresh(refToken))
-                const res=await axios.request(originalReq)
-                return Promise.resolve(res)
-            }catch(e){
-                console.log("retry ",e);
-                localStorage.removeItem("access")
-            }
-        }
+        // if(!originalReq._retry){
+        //     originalReq._retry=true
+        //     const refToken: { refresh: string | null }={refresh:localStorage.getItem("refresh")}
+        //     try{
+        //         const refreshRes = await axios.post(
+        //             "http://localhost:8000/api/auth/token",
+        //             {
+        //                 refreshToken: refToken,
+        //             }
+        //           );
+        //           localStorage.setItem("access",refreshRes.data.access);
+        //         // await store.dispatch(refresh(refToken))
+        //         const res=await axios.request(originalReq)
+        //         return Promise.resolve(res)
+        //     }catch(e){
+        //         console.log("retry ",e);
+        //         localStorage.removeItem("access")
+        //     }
+        // }
         return Promise.reject(error)
     }
 )
