@@ -1,46 +1,25 @@
-// import usePostCategory from "@/hooks/usePostReactQuery";
 import useGetReactQuery from "@/hooks/useGetReactQuery";
-import { CATEGORY_URL } from "@/services/api";
+import { CATEGORY_URL, SUBCATEGORY_URL } from "@/services/api";
 import { Field, Form, Formik } from "formik"
-import { useRef } from "react";
+// import { useRef } from "react";
 import * as Yup from "yup";
+import usePostReactQuery from "@/hooks/usePostReactQuery";
 
 
 export default function AddSubCategoryForm() {
+    const {mutate}=usePostReactQuery(SUBCATEGORY_URL)
     const {data,isLoading}=useGetReactQuery(CATEGORY_URL)
     const categories:{catId:string;catName:string;}[]=[]
+
     if(!isLoading){
-        // console.log("get data",data.data.categories);
-        
         data.data.categories.map((cat)=>{
-        // console.log(cat.name,cat._id);
         const catInfo:{catId:string;catName:string;}={catId:cat._id,catName:cat.name}
-        categories.push(catInfo)
-        
-        
-   })
-//    console.log("obj",categories);
-    }
-   
-   
-    // useEffect(()=>{
+        categories.push(catInfo)  
+    })}
 
-    // })
-const formRef = useRef<HTMLFormElement>(null);
-// const {mutate}=usePostCategory()
-  const handleSubmit = () => {
-    if (formRef.current) {
-      const formElement:HTMLFormElement|null = formRef.current;
-      console.log("Form Element:", formElement);
-      console.log("Form Element2:", formRef);
-
-      const formData:FormData = new FormData(formElement);
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
-      
-    //   mutate(formData)
-    }
+  const handleSubmit = (value:{name:string, category: string}) => {
+    console.log(value);
+    mutate(value)
   };
 
   return (
@@ -56,7 +35,7 @@ const formRef = useRef<HTMLFormElement>(null);
     >
         {({errors})=>{
             return(
-                <Form ref={formRef} className="flex flex-col w-full rounded-lg  border-[1px] border-bl2 justify-center items-center py-5  px-2" >
+                <Form className="flex flex-col w-full rounded-lg  border-[1px] border-bl2 justify-center items-center py-5  px-2" >
 
                     <label htmlFor="subcategory" className="flex flex-col w-full gap-1">
                         <Field id="subcategory" name="name" placeholder="زیرگروه محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200"/>
@@ -65,7 +44,7 @@ const formRef = useRef<HTMLFormElement>(null);
                     <label htmlFor="category" className="flex flex-col w-full gap-1">
                         <Field as="select" id="category" name="category" placeholder="گروه محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200">
                             {categories.map((cat) => (
-                                <option key={cat.catName} value={cat.catId}>
+                                <option key={cat.catName} value={cat.catName} className="bg-bl1 border-[1px] border-bl2 hover:bg-bl2">
                                     {cat.catName}
                                 </option>
                             ))}
