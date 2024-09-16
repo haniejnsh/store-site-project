@@ -23,6 +23,10 @@ export default function usePostReactQuery(urlPost:string) {
         else if(urlPost=="/products"){alert("add products")}
         queryClient.invalidateQueries("product")
       },
+      onError:(error)=>{
+        console.log("error post",error);
+        
+      }
   });
 
   return mutation;

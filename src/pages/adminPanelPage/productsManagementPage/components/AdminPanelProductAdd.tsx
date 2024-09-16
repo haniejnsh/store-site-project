@@ -3,6 +3,7 @@ import {Accordion,AccordionContent,AccordionItem,AccordionTrigger,} from "@/comp
 import { RiMenuAddFill } from "react-icons/ri"
 import AddCategoryForm from "./AddCategoryForm"
 import AddSubCategoryForm from "./AddSubCategoryForm"
+import AddProductForm from "./AddProductForm"
 
 export default function AdminPanelProductAdd() {
   return (
@@ -14,7 +15,7 @@ export default function AdminPanelProductAdd() {
           </div>
         </SheetTrigger>
         {/* <SheetContent side="left" style={{ width: '90vw', maxWidth: '100vw' }} > */}
-        <SheetContent side="left"  className="text-right font-custom">
+        <SheetContent side="left"  className="text-right font-custom overflow-scroll">
             <SheetHeader className="mt-8">
                 <SheetTitle className="text-right">افزودن کالا</SheetTitle>
                 {/* <SheetDescription>
@@ -40,7 +41,7 @@ export default function AdminPanelProductAdd() {
                 <AccordionItem value="item-3">
                   <AccordionTrigger>افزودن کالا</AccordionTrigger>
                   <AccordionContent>
-                    Yes. It adheres to the WAI-ARIA design pattern.
+                    <AddProductForm/>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>

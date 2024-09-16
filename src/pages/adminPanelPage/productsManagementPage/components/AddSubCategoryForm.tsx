@@ -44,7 +44,7 @@ export default function AddSubCategoryForm() {
                     <label htmlFor="category" className="flex flex-col w-full gap-1">
                         <Field as="select" id="category" name="category" placeholder="گروه محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200">
                             {categories.map((cat) => (
-                                <option key={cat.catName} value={cat.catName} className="bg-bl1 border-[1px] border-bl2 hover:bg-bl2">
+                                <option key={cat.catName} value={cat.catId} className="bg-bl1 border-[1px] border-bl2 hover:bg-bl2">
                                     {cat.catName}
                                 </option>
                             ))}
