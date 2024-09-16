@@ -1,25 +1,53 @@
 import {Table,TableBody,TableCaption,TableCell,TableFooter,TableHead,TableHeader,TableRow} from "@/components/ui/table"
+import useGetReactQuery from "@/hooks/useGetReactQuery"
+import { PRODUCT_URL } from "@/services/api"
+import { MdDeleteForever } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
 
 export default function ProductsManagementTable() {
+  const {isLoading,data}=useGetReactQuery(PRODUCT_URL)
+  if(isLoading){
+    return(
+      <div>loading ...</div>
+    )
+  }
+  console.log("table data",data.data.products);
+  console.log("img",data.data.products[4].images[0]);
+  
+  const productsData=data.data.products
   return (
-    <Table>
-  <TableCaption>A list of your recent invoices.</TableCaption>
-  <TableHeader>
-    <TableRow>
-      <TableHead className="w-[100px]">Invoice</TableHead>
-      <TableHead>Status</TableHead>
-      <TableHead>Method</TableHead>
-      <TableHead className="text-right">Amount</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell className="font-medium">INV001</TableCell>
-      <TableCell>Paid</TableCell>
-      <TableCell>Credit Card</TableCell>
-      <TableCell className="text-right">$250.00</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
+    <div className="w-5/6 my-4 mx-auto shadow-customshadow border-bl2 border-[1px] rounded-lg">
+    <Table className="">
+      {/* <TableCaption></TableCaption> */}
+      <TableHeader>
+        <TableRow className="h-14 text-gray-500 font-bold bg-bl2 hover:bg-bl2">
+          <TableHead className="text-center text-xl text-gray-500 font-bold px-8">تصویر</TableHead>
+          <TableHead className="text-center text-xl text-gray-500 font-bold px-2">نام کالا</TableHead>
+          <TableHead className="text-center text-xl text-gray-500 font-bold px-2">دسته بندی</TableHead>
+          <TableHead className="text-center text-xl text-gray-500 font-bold px-2">عملیات</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {productsData.map(pro=>{
+          return(
+            <TableRow className="odd:bg-bl1 even:bg-white">
+              <TableCell className="text-center w-14 px-8">
+                <img className="w-12 h-12" src={`http://${pro?.images[0]}`} alt="pic" />
+              </TableCell>
+              <TableCell className="text-center text-lg text-gray-500 px-2">{pro.name}</TableCell>
+              <TableCell className="text-center text-md text-gray-500 px-2">{pro.category.name}/{pro.subcategory.name}</TableCell>
+              <TableCell className="text-center">
+                <div className="flex justify-around">
+                  <MdDeleteForever className="text-2xl text-blue-400 hover:text-red-500 cursor-pointer transition"/>
+                  <FaEdit className="text-lg text-blue-400 hover:text-yellow-500 cursor-pointer transition "/>
+                </div>
+              </TableCell>
+            </TableRow>
+          )
+        })}
+        
+      </TableBody>
+    </Table>
+    </div>
   )
 }

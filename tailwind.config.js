@@ -10,6 +10,9 @@ export default {
 		fontFamily: {
 			custom: ["farsi-iransans", "english-opensans"],
 		  },
+		  boxShadow: {
+			customshadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)'
+		  },
   		colors: {
   			bl1: '#eff6ff',
   			bl2: '#dbeafe',
