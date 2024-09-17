@@ -4,29 +4,35 @@ import { PRODUCT_URL } from "@/services/api"
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import PaginationHook from "@/components/common/Pagination";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ProductsManagementTable() {
   const [pageCounter,setPageCounter]=useState(1)
   console.log("asli counter",pageCounter);
   
-  const {isLoading,data}=useGetReactQuery(PRODUCT_URL)
+  const {isLoading,data, refetch}=useGetReactQuery(`${PRODUCT_URL}?page=${pageCounter}&limit=6`)
+  
+  useEffect(() => {
+    refetch();  // درخواست مجدد به API
+  }, [pageCounter, refetch]);
+// images
+
   if(isLoading){
     return(
       <div>loading ...</div>
     )
   }
   console.log("table data",data.data.products);
-  console.log("img",data.data.products[4].images[0]);
+  // console.log("img",data.data.products[4].images[0]);
   
   const productsData=data.data.products
   return (
-    <div>
-    <div className="w-5/6 my-4 mx-auto shadow-customshadow border-bl2 border-[1px] rounded-lg">
-    <Table className="">
+    <div className="flex flex-col gap-2 pt-4 pb-8">
+    <div className="w-5/6 my-4 mx-auto shadow-customshadow border-bl2 border-[1px] rounded-lg h-[444px]">
+    <Table className="border-b border-bl2">
       {/* <TableCaption></TableCaption> */}
       <TableHeader>
-        <TableRow className="h-14 text-gray-500 font-bold bg-bl2 hover:bg-bl2">
+        <TableRow className="h-14 text-gray-500 font-bold bg-bl2 hover:bg-bl2 border-bl2">
           <TableHead className="text-center text-xl text-gray-500 font-bold px-8">تصویر</TableHead>
           <TableHead className="text-center text-xl text-gray-500 font-bold px-2">نام کالا</TableHead>
           <TableHead className="text-center text-xl text-gray-500 font-bold px-2">دسته بندی</TableHead>
@@ -36,7 +42,7 @@ export default function ProductsManagementTable() {
       <TableBody>
         {productsData.map(pro=>{
           return(
-            <TableRow className="odd:bg-bl1 even:bg-white">
+            <TableRow className="odd:bg-white even:bg-bl1 border-bl2">
               <TableCell className="text-center w-14 px-8">
                 <img className="w-12 h-12" src={`http://${pro?.images[0]}`} alt="pic" />
               </TableCell>
@@ -55,7 +61,7 @@ export default function ProductsManagementTable() {
       </TableBody>
     </Table>
     </div>
-    <PaginationHook counterSet={(t)=>setPageCounter(t)} pageNumber={pageCounter}/>
+    <PaginationHook counterSet={(t)=>setPageCounter(t)} pageNumber={pageCounter} totalPage={data.total_pages}/>
     </div>
   )
 }
