@@ -3,8 +3,13 @@ import useGetReactQuery from "@/hooks/useGetReactQuery"
 import { PRODUCT_URL } from "@/services/api"
 import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
+import PaginationHook from "@/components/common/Pagination";
+import { useState } from "react";
 
 export default function ProductsManagementTable() {
+  const [pageCounter,setPageCounter]=useState(1)
+  console.log("asli counter",pageCounter);
+  
   const {isLoading,data}=useGetReactQuery(PRODUCT_URL)
   if(isLoading){
     return(
@@ -16,6 +21,7 @@ export default function ProductsManagementTable() {
   
   const productsData=data.data.products
   return (
+    <div>
     <div className="w-5/6 my-4 mx-auto shadow-customshadow border-bl2 border-[1px] rounded-lg">
     <Table className="">
       {/* <TableCaption></TableCaption> */}
@@ -48,6 +54,8 @@ export default function ProductsManagementTable() {
         
       </TableBody>
     </Table>
+    </div>
+    <PaginationHook counterSet={(t)=>setPageCounter(t)} pageNumber={pageCounter}/>
     </div>
   )
 }
