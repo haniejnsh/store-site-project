@@ -73,7 +73,7 @@ export default function InventoryManagementTable() {
               </TableCell>
               <TableCell className="text-center text-lg text-gray-500 px-2 w-[52%]">{pro.name}</TableCell>
               {/* <TableCell className="text-center text-md text-gray-500 px-2 w-[25%]">{pro.category.name}/{pro.subcategory.name}</TableCell> */}
-              <TableCell className="text-center w-[15%] text-gray-500">
+              <TableCell className="text-centerbg-red-50 w-[15%] text-gray-500">
                 {/* <input type="button" value={pro.quantity} className="w-full"/> */}
                 {editProductId === pro._id && editField === "quantity" ? (
                     <input

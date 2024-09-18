@@ -5,12 +5,13 @@ import { ORDER_URL } from "@/services/api"
 // import { FaEdit } from "react-icons/fa";
 import PaginationHook from "@/components/common/Pagination";
 import { useEffect, useState } from "react";
+import moment from "moment";
+import "jalali-moment";
+// import { GregorianToJalali } from "jalali-date";
+import * as shamsi from 'shamsi-date-converter';
 
 export default function OrdersManagementTable() {
   const [pageCounter,setPageCounter]=useState(1)
-//   const [editProductId, setEditProductId] = useState(null); // برای پیگیری ردیف در حال ویرایش
-//   const [editField, setEditField] = useState(null); // پیگیری فیلد (price یا quantity) که در حال ویرایش است
-//   const [editValue, setEditValue] = useState("");
   
   const {isLoading,data, refetch}=useGetReactQuery(`${ORDER_URL}?page=${pageCounter}&limit=5`)
   
@@ -25,34 +26,15 @@ export default function OrdersManagementTable() {
     )
   }
   console.log("table data",data.data.orders);
-  // console.log("img",data.data.products[4].images[0]);
   
   const ordersData=data.data.orders
-//   const handleEdit = (productId, field, value) => {
-//     setEditProductId(productId);
-//     setEditField(field);
-//     setEditValue(value);
-//   };
 
-  // مدیریت تغییر مقدار
-//   const handleInputChange = (e) => {
-//     setEditValue(e.target.value);
-//   };
+// const shamsiChange=shamsi.gregorianToJalali(1989, 1, 24).join('/')
 
-  // ذخیره‌سازی مقدار ویرایش‌شده
-//   const handleSave = (productId) => {
-//     console.log(`مقدار جدید برای محصول ${productId}: ${editField} = ${editValue}`);
-//     // اینجا می‌توانید تابع ذخیره به API را اضافه کنید
-//     setEditProductId(null); // پایان ویرایش
-//     setEditField(null);
-//     setEditValue("");
-//   };
-
-
-
+// console.log("تاریخ تبدیل‌شده (شمسی):",shamsiChange );
   return (
     <div className="flex flex-col gap-2 pt-4 pb-8">
-    <div className="w-5/6 my-4 mx-auto shadow-customshadow border-bl2 border-[1px] rounded-lg min-h-[381px]">
+    <div className="w-5/6 my-4 mx-auto shadow-customshadow border-bl2 border-[1px] rounded-lg min-h-[282px]">
     <Table className="border-b border-bl2">
       {/* <TableCaption></TableCaption> */}
       <TableHeader>
@@ -70,13 +52,13 @@ export default function OrdersManagementTable() {
                 <TableCell className="text-center text-lg text-gray-500 px-2 w-[30%]">
                     {`${order.user.firstname} ${order.user.lastname}`}
                 </TableCell>
-                <TableCell className="text-center bg-red-50 w-[20%] text-gray-500">
+                <TableCell className="text-center w-[25%] text-gray-500">
                     {order.totalPrice}
                 </TableCell>
-                <TableCell className="text-center w-[30%] text-gray-500">
-                
-                </TableCell>
                 <TableCell className="text-center w-[20%] text-gray-500">
+                {shamsi.gregorianToJalali(order.createdAt).join('/')}
+                </TableCell>
+                <TableCell className="text-center w-[25%] text-gray-500">
                 <span className="hover:text-blue-300 cursor-pointer transition text-blue-400 text-lg">مشاهده سفارش</span>
                 </TableCell>
             </TableRow>
