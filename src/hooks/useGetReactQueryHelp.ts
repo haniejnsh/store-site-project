@@ -4,7 +4,7 @@ import axios from "axios"
 
 export default function useGetReactQueryHelp(urlGet:string) {
   const query:UseQueryResult<any, Error>= useQuery({
-    queryKey: ["product"],
+    queryKey: ["producthelp"],
     queryFn: async () => {
       const res = await axios.get(`${BASE_URL}${urlGet}`);
       return res.data;

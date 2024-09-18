@@ -10,7 +10,7 @@ export default function ProductsManagementTable() {
   const [pageCounter,setPageCounter]=useState(1)
   console.log("asli counter",pageCounter);
   
-  const {isLoading,data, refetch}=useGetReactQuery(`${PRODUCT_URL}?page=${pageCounter}&limit=6`)
+  const {isLoading,data, refetch}=useGetReactQuery(`${PRODUCT_URL}?page=${pageCounter}&limit=5`)
   
   useEffect(() => {
     refetch();  // درخواست مجدد به API
@@ -28,7 +28,7 @@ export default function ProductsManagementTable() {
   const productsData=data.data.products
   return (
     <div className="flex flex-col gap-2 pt-4 pb-8">
-    <div className="w-5/6 my-4 mx-auto shadow-customshadow border-bl2 border-[1px] rounded-lg h-[444px]">
+    <div className="w-5/6 my-4 mx-auto shadow-customshadow border-bl2 border-[1px] rounded-lg min-h-[381px]">
     <Table className="border-b border-bl2">
       {/* <TableCaption></TableCaption> */}
       <TableHeader>
@@ -40,15 +40,15 @@ export default function ProductsManagementTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {productsData.map(pro=>{
+        {productsData?.map(pro=>{
           return(
             <TableRow className="odd:bg-white even:bg-bl1 border-bl2">
               <TableCell className="text-center w-14 px-8">
                 <img className="w-12 h-12" src={`http://${pro?.images[0]}`} alt="pic" />
               </TableCell>
-              <TableCell className="text-center text-lg text-gray-500 px-2">{pro.name}</TableCell>
-              <TableCell className="text-center text-md text-gray-500 px-2">{pro.category.name}/{pro.subcategory.name}</TableCell>
-              <TableCell className="text-center">
+              <TableCell className="text-center text-lg text-gray-500 px-2 w-[52%]">{pro.name}</TableCell>
+              <TableCell className="text-center text-md text-gray-500 px-2 w-[25%]">{pro.category.name}/{pro.subcategory.name}</TableCell>
+              <TableCell className="text-center w-[17%]">
                 <div className="flex justify-around">
                   <MdDeleteForever className="text-2xl text-blue-400 hover:text-red-500 cursor-pointer transition"/>
                   <FaEdit className="text-lg text-blue-400 hover:text-yellow-500 cursor-pointer transition "/>

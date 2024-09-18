@@ -1,18 +1,21 @@
-import useGetReactQuery from "@/hooks/useGetReactQuery";
+// import useGetReactQuery from "@/hooks/useGetReactQuery";
 import { CATEGORY_URL, SUBCATEGORY_URL } from "@/services/api";
 import { Field, Form, Formik } from "formik"
 // import { useRef } from "react";
 import * as Yup from "yup";
 import usePostReactQuery from "@/hooks/usePostReactQuery";
+import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 
 
 export default function AddSubCategoryForm() {
     const {mutate}=usePostReactQuery(SUBCATEGORY_URL)
-    const {data,isLoading}=useGetReactQuery(CATEGORY_URL)
+    const {data,isLoading}=useGetReactQueryHelp(CATEGORY_URL)
     const categories:{catId:string;catName:string;}[]=[]
+    console.log("category haaa",data);
+    
 
-    if(!isLoading){
-        data.data.categories.map((cat)=>{
+    if(!isLoading && data){
+        data.data.categories?.map((cat)=>{
         const catInfo:{catId:string;catName:string;}={catId:cat._id,catName:cat.name}
         categories.push(catInfo)  
     })}
@@ -43,7 +46,7 @@ export default function AddSubCategoryForm() {
                     </label>
                     <label htmlFor="category" className="flex flex-col w-full gap-1">
                         <Field as="select" id="category" name="category" placeholder="گروه محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200">
-                            {categories.map((cat) => (
+                            {categories?.map((cat) => (
                                 <option key={cat.catName} value={cat.catId} className="bg-bl1 border-[1px] border-bl2 hover:bg-bl2">
                                     {cat.catName}
                                 </option>

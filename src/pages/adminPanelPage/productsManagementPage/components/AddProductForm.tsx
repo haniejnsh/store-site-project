@@ -1,4 +1,5 @@
-import useGetReactQuery from "@/hooks/useGetReactQuery";
+// import useGetReactQuery from "@/hooks/useGetReactQuery";
+import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 // import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 import usePostReactQuery from "@/hooks/usePostReactQuery";
 import { BASE_URL, CATEGORY_URL, PRODUCT_URL, SUBCATEGORY_URL } from "@/services/api";
@@ -11,7 +12,7 @@ import * as Yup from "yup";
 export default function AddProductForm() {
     
         const categories:{catId:string;catName:string;}[]=[]
-        const {data:categoryData,isLoading:catLoading}=useGetReactQuery(CATEGORY_URL)
+        const {data:categoryData,isLoading:catLoading}=useGetReactQueryHelp(CATEGORY_URL)
         // const {data:subCategoryData,isLoading:subLoading}=useGetReactQueryHelp(SUBCATEGORY_URL)
         const {mutate}=usePostReactQuery(PRODUCT_URL)
         const formRef = useRef<HTMLFormElement>(null);
@@ -19,7 +20,7 @@ export default function AddProductForm() {
         if(!catLoading && categoryData){
             console.log("category",categoryData);
             
-            categoryData.data.categories.map((cat)=>{
+            categoryData.data.categories?.map((cat)=>{
                 const catInfo:{catId:string;catName:string;}={catId:cat._id,catName:cat.name}
             categories.push(catInfo)  
             })
@@ -44,7 +45,7 @@ export default function AddProductForm() {
     useEffect(() => {
         const getData = async () => {
           try {
-            const res = await axios.get(`${BASE_URL}${SUBCATEGORY_URL}`);
+            const res = await axios.get(`${BASE_URL}${SUBCATEGORY_URL}?page=1&limit=30`);
             console.log("okk",res.data);
             setX(res.data.data.subcategories)
           } catch (e) {
