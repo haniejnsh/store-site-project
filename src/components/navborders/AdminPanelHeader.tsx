@@ -1,8 +1,14 @@
 import { NavLink } from "react-router-dom"
 import logo from "../../assets/images/logo-hanie.jpeg"
 import { RiLogoutBoxLine } from "react-icons/ri"
+import useLogout from "@/hooks/useLogout"
+
 
 export default function AdminPanelHeader() {
+  const {mutate}=useLogout()
+  const handleLogout=()=>{
+    mutate()
+  }
   const tailwindCss:string="flex items-center cursor-pointer hover:text-blue-300 transition"
   return (
     <div className="flex w-full shadow-lg shadow-bl1 border-b-[1px] border-bl2">
@@ -16,7 +22,7 @@ export default function AdminPanelHeader() {
         <NavLink to="/admin/inventorymanagement" className={({isActive})=>isActive?`text-blue-400 ${tailwindCss}`:tailwindCss}>موجودی و قیمت</NavLink>
         <NavLink  to="/admin/ordersmanagement" className={({isActive})=>isActive?`text-blue-400 ${tailwindCss}`:tailwindCss}>سفارش ها</NavLink>
       </div>
-      <div className="border border-bl2  flex justify-center items-center p-2 rounded-lg text-gray-400 hover:text-blue-300 cursor-pointer transition">
+      <div onClick={handleLogout} className="border border-bl2  flex justify-center items-center p-2 rounded-lg text-gray-400 hover:text-blue-300 cursor-pointer transition">
         <RiLogoutBoxLine className="text-2xl"/>
       </div>
       
