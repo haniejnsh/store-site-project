@@ -4,7 +4,6 @@ import OrdersManagementTable from "./components/OrdersManagementTable";
 
 export default function OrdersManagementPage() {
   const [filterUrl,setFilterUrl]=useState("")
-  console.log("filter url : ",filterUrl);
   
   return (
     <div>

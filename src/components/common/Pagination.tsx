@@ -3,11 +3,8 @@ import { BsCaretLeftSquareFill,BsCaretRightSquareFill } from "react-icons/bs";
 
 
 export default function PaginationHook({counterSet,pageNumber,totalPage}) {
-    // const pg=10
-    // const [counter,setCounter]=useState(5)
-    // console.log("pg",counter);
+
     const changeCounter=(e)=>{
-        console.log("change",typeof(Number(e.target.innerHTML)));
         const x=Number(e.target.innerHTML)
         counterSet(x)
         

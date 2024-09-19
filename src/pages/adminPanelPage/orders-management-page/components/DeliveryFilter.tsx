@@ -3,10 +3,8 @@ import { useState } from "react";
 export default function DeliveryFilter({filterSet}) {
 
     const [selectedOption, setSelectedOption] = useState("");
-    console.log(selectedOption);
     
 
-  // تابع برای مدیریت تغییرات در رادیو باتن‌ها
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
     filterSet(event.target.value)
@@ -49,24 +47,9 @@ export default function DeliveryFilter({filterSet}) {
         />
         <label htmlFor="option-three" className="cursor-pointer">همه سفارش ها</label>
       </div>
-
-
-      {/* <p>انتخاب شما: {selectedOption}</p> */}
         
         
     </div>
   )
 }
 
-
-
-{/* <RadioGroup defaultValue="option-one">
-            <div className="flex items-center space-x-2">
-                <RadioGroupItem value="option-one" id="option-one" /> */}
-                {/* <Label htmlFor="option-one">Option One</Label> */}
-            {/* </div>
-            <div className="flex items-center space-x-2">
-                <RadioGroupItem value="option-two" id="option-two" />
-                <Label htmlFor="option-two">Option Two</Label>
-            </div>
-        </RadioGroup> */}

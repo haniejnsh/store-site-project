@@ -14,14 +14,9 @@ export default function AdminPanelProductAdd() {
             <RiMenuAddFill/>
           </div>
         </SheetTrigger>
-        {/* <SheetContent side="left" style={{ width: '90vw', maxWidth: '100vw' }} > */}
         <SheetContent side="left"  className="text-right font-custom overflow-scroll">
             <SheetHeader className="mt-8">
                 <SheetTitle className="text-right">افزودن کالا</SheetTitle>
-                {/* <SheetDescription>
-                    This action cannot be undone. This will permanently delete your account
-                    and remove your data from our servers.
-                </SheetDescription> */}
             </SheetHeader>
             <div>
               <Accordion type="single" collapsible>

@@ -8,22 +8,18 @@ import { useEffect, useState } from "react";
 
 export default function ProductsManagementTable() {
   const [pageCounter,setPageCounter]=useState(1)
-  console.log("asli counter",pageCounter);
   
   const {isLoading,data, refetch}=useGetReactQuery(`${PRODUCT_URL}?page=${pageCounter}&limit=5`)
   
   useEffect(() => {
-    refetch();  // درخواست مجدد به API
+    refetch(); 
   }, [pageCounter, refetch]);
-// images
 
   if(isLoading){
     return(
       <div>loading ...</div>
     )
   }
-  console.log("table data",data.data.products);
-  // console.log("img",data.data.products[4].images[0]);
   
   const productsData=data.data.products
   return (

@@ -1,34 +1,24 @@
-// import useGetReactQuery from "@/hooks/useGetReactQuery";
 import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
-// import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 import usePostReactQuery from "@/hooks/usePostReactQuery";
 import { BASE_URL, CATEGORY_URL, PRODUCT_URL, SUBCATEGORY_URL } from "@/services/api";
 import axios from "axios";
 import { Field, Form, Formik } from "formik"
 import { useEffect,useRef,useState  } from "react";
 import * as Yup from "yup";
-// // import usePostReactQuery from "@/hooks/usePostReactQuery";
-// map    
+   
 export default function AddProductForm() {
     
         const categories:{catId:string;catName:string;}[]=[]
         const {data:categoryData,isLoading:catLoading}=useGetReactQueryHelp(CATEGORY_URL)
-        // const {data:subCategoryData,isLoading:subLoading}=useGetReactQueryHelp(SUBCATEGORY_URL)
         const {mutate}=usePostReactQuery(PRODUCT_URL)
         const formRef = useRef<HTMLFormElement>(null);
     
         if(!catLoading && categoryData){
-            console.log("category",categoryData);
-            
             categoryData.data.categories?.map((cat)=>{
                 const catInfo:{catId:string;catName:string;}={catId:cat._id,catName:cat.name}
             categories.push(catInfo)  
             })
         }
-
-        // if(!subLoading){
-        //     console.log("subcategory",subCategoryData); 
-        // }
     
 
     const inputItems:{eng:string;per:string;}[]=[
@@ -41,12 +31,11 @@ export default function AddProductForm() {
     //////////////////////////////////////////////////////////////////////////////////
     const [x,setX]=useState()
     let subCategories:any[]=[]
-    console.log("x",x);
+
     useEffect(() => {
         const getData = async () => {
           try {
             const res = await axios.get(`${BASE_URL}${SUBCATEGORY_URL}?page=1&limit=30`);
-            console.log("okk",res.data);
             setX(res.data.data.subcategories)
           } catch (e) {
             console.log(e);
@@ -58,7 +47,6 @@ export default function AddProductForm() {
     /////////////////////////////////////////////////////////////////////////////////
 
   const handleSubmit = (value) => {
-    console.log("vared shode",value);
     const formData = new FormData();
 
         // اضافه کردن داده‌های فرم به فرم دیتا
@@ -125,11 +113,7 @@ export default function AddProductForm() {
                             <Field as="select" id="category" name="category" placeholder="گروه محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200" onChange={(e) => {
                                 const value = e.currentTarget.value;
                                 setFieldValue("category", value); 
-                                console.log("دسته انتخاب شده:", value);
                                 subCategories=x.filter(item=>item.category==value)
-                                console.log("y",subcategories);
-                                // setX(y)
-                                console.log("x2",x);
                                 }}>
                                 <option disabled  value="" className="bg-bl1 border-[1px] border-bl2 hover:bg-bl2">
                                         "انتخاب گروه محصول"
@@ -160,16 +144,14 @@ export default function AddProductForm() {
                         <label  htmlFor="thumbnail" className="flex flex-col w-full gap-1">
                             <input type="file" multiple id="thumbnail" name="thumbnail" placeholder="تصویرکوچک محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200" onChange={(event) => {
                                 const files = event.currentTarget.files;
-                                setFieldValue("thumbnail", files); // اضافه کردن فایل‌ها به فرم
+                                setFieldValue("thumbnail", files); 
                             }}/>
-                            {/* <span className="text-red-700 text-xs pr-4">{errors.thambnail}</span> */}
                         </label>
                         <label  htmlFor="imsges" className="flex flex-col w-full gap-1">
                             <input type="file" multiple id="images" name="images" placeholder="تصاویر محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200" onChange={(event) => {
                                 const files = event.currentTarget.files;
-                                setFieldValue("images", files); // اضافه کردن فایل‌ها به فرم
+                                setFieldValue("images", files); 
                             }}/>
-                            {/* <span className="text-red-700 text-xs pr-4">{errors.images}</span> */}
                         </label>
                         
 

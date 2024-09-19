@@ -18,7 +18,6 @@ export default function OrdersManagementTable({filterUrl}) {
   else{
     fil=""
   }
-  // console.log("filter url reside 2:",filterUrl,"///",typeof(filterUrl));
 
   const {isLoading,data, refetch}=useGetReactQuery(`${ORDER_URL}?${fil}page=${pageCounter}&limit=5`)
   useEffect(() => {
@@ -35,13 +34,10 @@ export default function OrdersManagementTable({filterUrl}) {
       <div>loading ...</div>
     )
   }
-  console.log("table data",data.data.orders);
   
   const ordersData=data.data.orders
 
-// const shamsiChange=shamsi.gregorianToJalali(1989, 1, 24).join('/')
 
-// console.log("تاریخ تبدیل‌شده (شمسی):",shamsiChange );
   return (
     <div className="flex flex-col gap-2 pt-4 pb-8">
     <div className="w-5/6 my-4 mx-auto shadow-customshadow border-bl2 border-[1px] rounded-lg min-h-[282px]">

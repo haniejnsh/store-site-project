@@ -1,31 +1,32 @@
 import {Table,TableBody,TableCaption,TableCell,TableFooter,TableHead,TableHeader,TableRow} from "@/components/ui/table"
 import useGetReactQuery from "@/hooks/useGetReactQuery"
 import { PRODUCT_URL } from "@/services/api"
-import { MdDeleteForever } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
 import PaginationHook from "@/components/common/Pagination";
 import { useEffect, useState } from "react";
 
 export default function InventoryManagementTable() {
   const [pageCounter,setPageCounter]=useState(1)
-  const [editProductId, setEditProductId] = useState(null); // برای پیگیری ردیف در حال ویرایش
-  const [editField, setEditField] = useState(null); // پیگیری فیلد (price یا quantity) که در حال ویرایش است
+  const [editProductId, setEditProductId] = useState(null); 
+  const [editField, setEditField] = useState(null); 
   const [editValue, setEditValue] = useState("");
   
-  const {isLoading,data, refetch}=useGetReactQuery(`${PRODUCT_URL}?page=${pageCounter}&limit=5`)
+  const {isLoading,data,isError,error, refetch}=useGetReactQuery(`${PRODUCT_URL}?page=${pageCounter}&limit=5`)
   
   useEffect(() => {
-    refetch();  // درخواست مجدد به API
+    refetch(); 
   }, [pageCounter, refetch]);
-// images
+
 
   if(isLoading){
     return(
       <div>loading ...</div>
     )
   }
-  console.log("table data",data.data.products);
-  // console.log("img",data.data.products[4].images[0]);
+  if(isError){
+    return(
+      <div>{error.response.data.message}</div>
+    )
+  }
   
   const productsData=data.data.products
   const handleEdit = (productId, field, value) => {
@@ -34,16 +35,14 @@ export default function InventoryManagementTable() {
     setEditValue(value);
   };
 
-  // مدیریت تغییر مقدار
+
   const handleInputChange = (e) => {
     setEditValue(e.target.value);
   };
 
-  // ذخیره‌سازی مقدار ویرایش‌شده
   const handleSave = (productId) => {
-    console.log(`مقدار جدید برای محصول ${productId}: ${editField} = ${editValue}`);
-    // اینجا می‌توانید تابع ذخیره به API را اضافه کنید
-    setEditProductId(null); // پایان ویرایش
+    // console.log(`مقدار جدید برای محصول ${productId}: ${editField} = ${editValue}`);
+    setEditProductId(null);
     setEditField(null);
     setEditValue("");
   };
@@ -59,7 +58,6 @@ export default function InventoryManagementTable() {
         <TableRow className="h-14 text-gray-500 font-bold bg-bl2 hover:bg-bl2 border-bl2">
           <TableHead className="text-center text-xl text-gray-500 font-bold px-8">تصویر</TableHead>
           <TableHead className="text-center text-xl text-gray-500 font-bold px-2">نام کالا</TableHead>
-          {/* <TableHead className="text-center text-xl text-gray-500 font-bold px-2">دسته بندی</TableHead> */}
           <TableHead className="text-center text-xl text-gray-500 font-bold px-2">موجودی</TableHead>
           <TableHead className="text-center text-xl text-gray-500 font-bold px-2">قیمت</TableHead>
         </TableRow>
@@ -72,16 +70,14 @@ export default function InventoryManagementTable() {
                 <img className="w-12 h-12" src={`http://${pro?.images[0]}`} alt="pic" />
               </TableCell>
               <TableCell className="text-center text-lg text-gray-500 px-2 w-[52%]">{pro.name}</TableCell>
-              {/* <TableCell className="text-center text-md text-gray-500 px-2 w-[25%]">{pro.category.name}/{pro.subcategory.name}</TableCell> */}
               <TableCell className="text-centerbg-red-50 w-[15%] text-gray-500">
-                {/* <input type="button" value={pro.quantity} className="w-full"/> */}
                 {editProductId === pro._id && editField === "quantity" ? (
                     <input
                         className="w-full focus:outline-none focus:border-[1px] border-bl2 text-center"
                         type="number"
                         value={editValue}
                         onChange={handleInputChange}
-                        onBlur={() => handleSave(pro._id)} // ذخیره مقدار جدید وقتی از input خارج می‌شویم
+                        onBlur={() => handleSave(pro._id)} 
                     />
                   ) : (
                     <input
@@ -93,7 +89,6 @@ export default function InventoryManagementTable() {
                   )}
               </TableCell>
               <TableCell className="text-center w-[22%] text-gray-500">
-                {/* <input type="button" value={pro.price} className="w-full" /> */}
                 {editProductId === pro._id && editField === "price" ? (
                     <input
                         className="w-full focus:outline-none focus:border-[1px] border-bl2 text-center"

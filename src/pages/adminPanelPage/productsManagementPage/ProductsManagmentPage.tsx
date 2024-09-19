@@ -1,4 +1,3 @@
-import { RiMenuAddFill } from "react-icons/ri";
 import ProductsManagementTable from "./components/ProductsManagementTable";
 import AdminPanelProductAdd from "./components/AdminPanelProductAdd";
 

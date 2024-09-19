@@ -4,26 +4,18 @@ import { Field, Form, Formik } from "formik"
 import { useRef } from "react";
 import * as Yup from "yup";
 
-
 export default function AddCategoryForm() {
-    // const handle=(e)=>{
-    //     e.preventDefault()
-    //     console.log("1",e);
-    //     console.log("2",e.target);
-        
-    // }
+
 const formRef = useRef<HTMLFormElement>(null);
 const {mutate}=usePostReactQuery(CATEGORY_URL)
   const handleSubmit = () => {
     if (formRef.current) {
       const formElement:HTMLFormElement|null = formRef.current;
-      console.log("Form Element:", formElement);
-      console.log("Form Element2:", formRef);
 
       const formData:FormData = new FormData(formElement);
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
-      }
+      // for (const [key, value] of formData.entries()) {
+      //   console.log(`${key}: ${value}`);
+      // }
       
       mutate(formData)
     }

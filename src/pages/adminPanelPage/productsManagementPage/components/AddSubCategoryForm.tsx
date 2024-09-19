@@ -1,7 +1,5 @@
-// import useGetReactQuery from "@/hooks/useGetReactQuery";
 import { CATEGORY_URL, SUBCATEGORY_URL } from "@/services/api";
 import { Field, Form, Formik } from "formik"
-// import { useRef } from "react";
 import * as Yup from "yup";
 import usePostReactQuery from "@/hooks/usePostReactQuery";
 import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
@@ -11,7 +9,6 @@ export default function AddSubCategoryForm() {
     const {mutate}=usePostReactQuery(SUBCATEGORY_URL)
     const {data,isLoading}=useGetReactQueryHelp(CATEGORY_URL)
     const categories:{catId:string;catName:string;}[]=[]
-    console.log("category haaa",data);
     
 
     if(!isLoading && data){
@@ -21,7 +18,6 @@ export default function AddSubCategoryForm() {
     })}
 
   const handleSubmit = (value:{name:string, category: string}) => {
-    console.log(value);
     mutate(value)
   };
 
