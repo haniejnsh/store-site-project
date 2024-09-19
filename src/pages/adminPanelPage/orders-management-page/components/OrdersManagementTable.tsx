@@ -1,24 +1,34 @@
 import {Table,TableBody,TableCaption,TableCell,TableFooter,TableHead,TableHeader,TableRow} from "@/components/ui/table"
 import useGetReactQuery from "@/hooks/useGetReactQuery"
 import { ORDER_URL } from "@/services/api"
-// import { MdDeleteForever } from "react-icons/md";
-// import { FaEdit } from "react-icons/fa";
 import PaginationHook from "@/components/common/Pagination";
 import { useEffect, useState } from "react";
-import moment from "moment";
-import "jalali-moment";
-// import { GregorianToJalali } from "jalali-date";
 import * as shamsi from 'shamsi-date-converter';
 
-export default function OrdersManagementTable() {
+export default function OrdersManagementTable({filterUrl}) {
   const [pageCounter,setPageCounter]=useState(1)
-  
-  const {isLoading,data, refetch}=useGetReactQuery(`${ORDER_URL}?page=${pageCounter}&limit=5`)
-  
+
+  let fil=""
+  if(filterUrl=="true"){
+    fil="deliveryStatus=true&"
+  }
+  else if(filterUrl=="false"){
+    fil="deliveryStatus=false&"
+  }
+  else{
+    fil=""
+  }
+  // console.log("filter url reside 2:",filterUrl,"///",typeof(filterUrl));
+
+  const {isLoading,data, refetch}=useGetReactQuery(`${ORDER_URL}?${fil}page=${pageCounter}&limit=5`)
   useEffect(() => {
-    refetch();  // درخواست مجدد به API
-  }, [pageCounter, refetch]);
-// images
+    setPageCounter(1);
+  }, [filterUrl]);
+
+
+  useEffect(() => {
+    refetch();
+  }, [pageCounter,fil, refetch]);
 
   if(isLoading){
     return(

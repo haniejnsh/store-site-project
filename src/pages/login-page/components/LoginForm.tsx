@@ -8,7 +8,7 @@ import { BsEyeSlashFill } from "react-icons/bs";
 import { IoEyeSharp } from "react-icons/io5";
 
 export default function LoginForm({rol}) {
-    const {mutate}=useLogin()
+    const {mutate}=useLogin(rol)
     const [hidden,setHidden]=useState("password")
     
   return (
@@ -17,7 +17,6 @@ export default function LoginForm({rol}) {
     onSubmit={
         (value)=>{
             const valueForm:{username:string;password:string;}={username:value.userName,password:value.password}
-            console.log(valueForm);
             mutate(valueForm)
         }
     }

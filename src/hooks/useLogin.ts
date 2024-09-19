@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
 
-export default function useLogin() {
+export default function useLogin(rol) {
     const navigate=useNavigate()
 
   const mutation= useMutation({
@@ -18,7 +18,9 @@ export default function useLogin() {
     onSuccess: (data) => {
         localStorage.setItem("access", data.token.accessToken);
         localStorage.setItem("refresh", data.token.refreshToken);
-        navigate("/");
+        if(rol=="مدیریت"){
+          navigate("/admin/productmanagement")
+        }
       },
   });
 
