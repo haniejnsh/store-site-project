@@ -3,6 +3,7 @@ import useGetReactQuery from "@/hooks/useGetReactQuery"
 import { PRODUCT_URL } from "@/services/api"
 import PaginationHook from "@/components/common/Pagination";
 import { useEffect, useState } from "react";
+import { ImSad2 } from "react-icons/im";
 
 export default function InventoryManagementTable() {
   const [pageCounter,setPageCounter]=useState(1)
@@ -19,12 +20,15 @@ export default function InventoryManagementTable() {
 
   if(isLoading){
     return(
-      <div>loading ...</div>
+      <div className="flex justify-center items-center mt-20 text-blue-400 text-xl font-bold">در حال بارگزاری . . .</div>
     )
   }
   if(isError){
     return(
-      <div>{error.response.data.message}</div>
+      <div className="flex justify-center mt-20 text-red-500 items-center gap-1">
+        <ImSad2 />
+        <span>{error.response.data.message}</span>
+      </div>
     )
   }
   

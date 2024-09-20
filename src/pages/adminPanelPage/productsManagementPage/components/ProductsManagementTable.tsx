@@ -5,11 +5,12 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import PaginationHook from "@/components/common/Pagination";
 import { useEffect, useState } from "react";
+import { ImSad2 } from "react-icons/im";
 
 export default function ProductsManagementTable() {
   const [pageCounter,setPageCounter]=useState(1)
   
-  const {isLoading,data, refetch}=useGetReactQuery(`${PRODUCT_URL}?page=${pageCounter}&limit=5`)
+  const {isLoading,data,isError,error, refetch}=useGetReactQuery(`${PRODUCT_URL}?page=${pageCounter}&limit=5`)
   
   useEffect(() => {
     refetch(); 
@@ -17,7 +18,16 @@ export default function ProductsManagementTable() {
 
   if(isLoading){
     return(
-      <div>loading ...</div>
+      <div className="flex justify-center items-center mt-20 text-blue-400 text-xl font-bold">در حال بارگزاری . . .</div>
+    )
+  }
+
+  if(isError){
+    return(
+      <div className="flex justify-center mt-20 text-red-500 items-center gap-1">
+        <ImSad2 />
+        <span>{error.response.data.message}</span>
+      </div>
     )
   }
   

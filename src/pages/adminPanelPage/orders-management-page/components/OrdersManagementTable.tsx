@@ -4,6 +4,7 @@ import { ORDER_URL } from "@/services/api"
 import PaginationHook from "@/components/common/Pagination";
 import { useEffect, useState } from "react";
 import * as shamsi from 'shamsi-date-converter';
+import { ImSad2 } from "react-icons/im";
 
 export default function OrdersManagementTable({filterUrl}) {
   const [pageCounter,setPageCounter]=useState(1)
@@ -19,7 +20,7 @@ export default function OrdersManagementTable({filterUrl}) {
     fil=""
   }
 
-  const {isLoading,data, refetch}=useGetReactQuery(`${ORDER_URL}?${fil}page=${pageCounter}&limit=5`)
+  const {isLoading,data,isError,error, refetch}=useGetReactQuery(`${ORDER_URL}?${fil}page=${pageCounter}&limit=5`)
   useEffect(() => {
     setPageCounter(1);
   }, [filterUrl]);
@@ -31,7 +32,16 @@ export default function OrdersManagementTable({filterUrl}) {
 
   if(isLoading){
     return(
-      <div>loading ...</div>
+      <div className="flex justify-center items-center mt-20 text-blue-400 text-xl font-bold">در حال بارگزاری . . .</div>
+    )
+  }
+
+  if(isError){
+    return(
+      <div className="flex justify-center mt-20 text-red-500 items-center gap-1">
+        <ImSad2 />
+        <span>{error.response.data.message}</span>
+      </div>
     )
   }
   
