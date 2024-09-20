@@ -11,7 +11,8 @@ import { IoEyeSharp } from "react-icons/io5";
 export default function LoginForm({rol}) {
     const {mutate,isError, error }=useLogin(rol)
     const [hidden,setHidden]=useState("password")
-
+    // if(isError){console.log("error login : ",error);
+    // }
   return (
     <Formik
     initialValues={{userName:"",password:""}}
