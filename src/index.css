@@ -3,17 +3,23 @@
 @tailwind utilities;
 
 
-@font-face {
+/* @font-face {
   font-family: "farsi-iransans";
   src: url("./assets/fonts/A-Iranian-Sans/Iranian\ Sans.ttf");
+} */
+@font-face {
+  font-family: "farsi-iransans";
+  src: url("./assets/fonts/dirooz-font-v0.2.1/Dirooz.ttf");
+  /* unicode-range: U+0600-06FF; */
 }
 @font-face {
   font-family: "english-opensans";
   src: url("./assets/fonts/Open_Sans/static/OpenSans-Medium.ttf");
 }
 
-#root{
-  font-family: "farsi-iransans","english-opensans";
+body{
+  font-family:"farsi-iransans","english-opensans";
+  font-size-adjust: 0.49;
 }
 
 @layer base {
