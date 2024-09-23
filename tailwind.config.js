@@ -7,9 +7,9 @@ export default {
   ],
   theme: {
   	extend: {
-		fontFamily: {
-			custom: ["farsi-iransans", "english-opensans"],
-		  },
+		// fontFamily: {
+		// 	custom: ["farsi-iransans", "english-opensans"],
+		//   },
 		  boxShadow: {
 			customshadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)'
 		  },
