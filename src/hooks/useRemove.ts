@@ -4,11 +4,11 @@ import axios from "../services/baseService"
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 import { queryClient } from "@/lib/reactQuery";
-
+import { useToast } from "@/hooks/use-toast"
 
 export default function useRemove(url) {
     // const navigate=useNavigate()
-
+    const { toast } = useToast()
   const mutation= useMutation({
     mutationFn: async (infoUser) => {
       const res = await axios.delete(`${url}/${infoUser}`);
@@ -19,6 +19,10 @@ export default function useRemove(url) {
     onSuccess: () => {
         alert("delete")
         queryClient.invalidateQueries("product")
+        toast({
+            description: "Your message has been sent.",
+            duration: 2000,
+          })
         // if(rol=="مدیریت"){
         //   navigate("/admin/productmanagement")
         // }
@@ -27,7 +31,10 @@ export default function useRemove(url) {
         console.log("error remove : ",error);
         if(error.status==500){
             queryClient.invalidateQueries("product")
-            alert("ok")
+            toast({
+                description: "Your message has been sent.",
+                duration: 2000,
+              })
         }
         
       }
