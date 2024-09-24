@@ -5,6 +5,8 @@ import axios from "axios";
 import { Field, Form, Formik } from "formik"
 import { useEffect,useRef,useState  } from "react";
 import * as Yup from "yup";
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
    
 export default function AddProductForm() {
     
@@ -12,6 +14,7 @@ export default function AddProductForm() {
         const {data:categoryData,isLoading:catLoading}=useGetReactQueryHelp(CATEGORY_URL)
         const {mutate}=usePostReactQuery(PRODUCT_URL)
         const formRef = useRef<HTMLFormElement>(null);
+        const editorRef = useRef();
     
         if(!catLoading && categoryData){
             categoryData.data.categories?.map((cat)=>{
@@ -46,7 +49,7 @@ export default function AddProductForm() {
 
     /////////////////////////////////////////////////////////////////////////////////
 
-  const handleSubmit = (value) => {
+  const handleSubmit = (value,{ resetForm }) => {
     const formData = new FormData();
 
         // اضافه کردن داده‌های فرم به فرم دیتا
@@ -72,6 +75,7 @@ export default function AddProductForm() {
         }
         
         mutate(formData)
+        resetForm();
   };
     return (
         <Formik
@@ -104,10 +108,40 @@ export default function AddProductForm() {
                             </label>
                         )})}
 
-                        <label  htmlFor="description" className="flex flex-col w-full gap-1">
+                        {/* <label  htmlFor="description" className="flex flex-col w-full gap-1">
                             <Field as="textarea" id="description" name="description" placeholder="توضیحات محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200"/>
                             <span className="text-red-700 text-xs pr-4">{errors.description}</span>
+                        </label> */}
+
+                        <label htmlFor="description" className="flex flex-col w-full gap-1">
+                            <CKEditor
+                                editor={ClassicEditor}
+                                data="توضیحات محصول"
+                                onChange={(event, editor) => {
+                                    const data = editor.getData();
+                                    setFieldValue("description", data); // ذخیره محتوای جدید در Formik
+                                }}
+                                config={{
+                                    toolbar: [
+                                        'heading',
+                                        'bold', 'italic', 'link',
+                                        'bulletedList', 'numberedList', 'blockQuote',
+                                        'insertTable',
+                                        'imageUpload', 'mediaEmbed',
+                                        'undo', 'redo'
+                                    ],
+                                }}
+                                // onReady={editor => {
+                                //     editorRef.current = editor;
+                                //   }}
+                            />
+                            <span className="text-red-700 text-xs pr-4">{errors.description}</span>
                         </label>
+
+                    
+
+
+
 
                         <label htmlFor="category" className="flex flex-col w-full gap-1">
                             <Field as="select" id="category" name="category" placeholder="گروه محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200" onChange={(e) => {

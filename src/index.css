@@ -22,6 +22,31 @@ body{
   font-size-adjust: 0.49;
 }
 
+/* .ck-content {
+  width: 100% !important;
+  flex-direction: column !important; 
+  overflow-wrap: break-word !important;
+} */
+.ck-editor {
+  overflow-wrap: break-word; /* اجازه به متن برای شکستن */
+  word-wrap: break-word; /* شکستن کلمات */
+  width: 100%; /* تنظیم حداکثر عرض */
+}
+
+.ck-toolbar {
+  overflow-wrap: break-word; /* اجازه به متن برای شکستن */
+  word-wrap: break-word; /* شکستن کلمات */
+  width: 100%; /* تنظیم حداکثر عرض */
+
+}
+
+.ck-content {
+  border-color: blue;
+  overflow-wrap: break-word; /* اجازه به متن برای شکستن */
+  word-wrap: break-word; /* شکستن کلمات */
+  max-width: 100%; /* تنظیم حداکثر عرض */
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

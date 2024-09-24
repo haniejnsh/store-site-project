@@ -8,7 +8,7 @@ export default function AddCategoryForm() {
 
 const formRef = useRef<HTMLFormElement>(null);
 const {mutate}=usePostReactQuery(CATEGORY_URL)
-  const handleSubmit = () => {
+  const handleSubmit = (_,{resetForm}) => {
     if (formRef.current) {
       const formElement:HTMLFormElement|null = formRef.current;
 
@@ -19,6 +19,7 @@ const {mutate}=usePostReactQuery(CATEGORY_URL)
       
       mutate(formData)
     }
+    resetForm();
   };
 
   return (

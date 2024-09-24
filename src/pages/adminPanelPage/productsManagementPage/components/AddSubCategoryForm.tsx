@@ -17,8 +17,9 @@ export default function AddSubCategoryForm() {
         categories.push(catInfo)  
     })}
 
-  const handleSubmit = (value:{name:string, category: string}) => {
+  const handleSubmit = (value:{name:string, category: string},{resetForm}) => {
     mutate(value)
+    resetForm();
   };
 
   return (
@@ -42,6 +43,9 @@ export default function AddSubCategoryForm() {
                     </label>
                     <label htmlFor="category" className="flex flex-col w-full gap-1">
                         <Field as="select" id="category" name="category" placeholder="گروه محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200">
+                            <option disabled value="" className="bg-bl1 border-[1px] border-bl2 hover:bg-bl2">
+                                "انتخاب زیرگروه محصول"
+                            </option>
                             {categories?.map((cat) => (
                                 <option key={cat.catName} value={cat.catId} className="bg-bl1 border-[1px] border-bl2 hover:bg-bl2">
                                     {cat.catName}
