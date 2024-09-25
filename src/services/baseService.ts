@@ -29,6 +29,7 @@ axios.interceptors.response.use(
             return Promise.reject(error)
         }
         if(error.response.status==403 && originalReq.url==AUTH_URL.refresh){
+            localStorage.removeItem("access")
             return Promise.reject(error)
         }
         if(error.response.status==401 && originalReq.url!=AUTH_URL.login){

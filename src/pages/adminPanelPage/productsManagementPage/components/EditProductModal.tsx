@@ -12,14 +12,14 @@ export default function EditProductModal({infoPro}) {
                 <AlertDialogContent className="bg-bl1 flex flex-col items-center gap-8 ">
                     <AlertDialogHeader className="flex flex-col items-center gap-3 w-full">
                         <AlertDialogTitle className="text-gray-500">ویرایش محصول</AlertDialogTitle>
-                        <AlertDialogDescription className="w-full max-h-[460px] overflow-y-scroll">
+                        <AlertDialogDescription className="w-full ">
                             <EditProductForm infoPro={infoPro}/>
                         </AlertDialogDescription>
                     </AlertDialogHeader>
-                    <AlertDialogFooter className="gap-6">
-                        <AlertDialogAction className="bg-blue-100 text-gray-500 w-20 border-blue-200 hover:bg-blue-300 border transition" >ویرایش</AlertDialogAction>
-                        <AlertDialogCancel className="bg-blue-100 text-gray-500 w-20 border border-blue-200 hover:bg-blue-300 transition">انصراف</AlertDialogCancel>
-                    </AlertDialogFooter>
+                    {/* <AlertDialogFooter className="gap-6"> */}
+                        {/* <AlertDialogAction className="bg-blue-100 text-gray-500 w-20 border-blue-200 hover:bg-blue-300 border transition" >ویرایش</AlertDialogAction>
+                        <AlertDialogCancel className="bg-blue-100 text-gray-500 w-20 border border-blue-200 hover:bg-blue-300 transition">انصراف</AlertDialogCancel> */}
+                    {/* </AlertDialogFooter> */}
                 </AlertDialogContent>
             </AlertDialog>
         </div>

@@ -1,12 +1,12 @@
-import { BASE_URL } from "@/services/api";
+// import { BASE_URL } from "@/services/api";
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
-import axios from "axios"
+import axios from "../services/baseService"
 
-export default function useGetReactQueryHelp(urlGet:string) {
+export default function useGetReactQueryHelp(urlGet:string,key) {
   const query:UseQueryResult<any, Error>= useQuery({
-    queryKey: ["producthelp"],
+    queryKey: [key],
     queryFn: async () => {
-      const res = await axios.get(`${BASE_URL}${urlGet}`);
+      const res = await axios.get(`${urlGet}`);
       return res.data;
     },
   });
