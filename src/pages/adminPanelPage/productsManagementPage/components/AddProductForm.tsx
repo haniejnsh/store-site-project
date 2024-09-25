@@ -7,6 +7,7 @@ import { useEffect,useRef,useState  } from "react";
 import * as Yup from "yup";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { SheetClose } from "@/components/ui/sheet";
    
 export default function AddProductForm() {
     
@@ -187,9 +188,8 @@ export default function AddProductForm() {
                                 setFieldValue("images", files); 
                             }}/>
                         </label>
-                        
-
-                        <button type="submit" className="w-full mt-1 py-1 rounded-lg text-gray-500 border-1 border-[1px] border-bl2 bg-bl1 hover:bg-bl2 transition">ایجاد</button>
+                        <SheetClose className="w-full">
+                        <button type="submit" className="w-full mt-1 py-1 rounded-lg text-gray-500 border-1 border-[1px] border-bl2 bg-bl1 hover:bg-bl2 transition">ایجاد</button></SheetClose>
                     </Form>
                 )
             }}

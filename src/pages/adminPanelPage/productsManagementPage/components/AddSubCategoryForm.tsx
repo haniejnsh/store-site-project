@@ -3,6 +3,7 @@ import { Field, Form, Formik } from "formik"
 import * as Yup from "yup";
 import usePostReactQuery from "@/hooks/usePostReactQuery";
 import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
+import { SheetClose } from "@/components/ui/sheet";
 
 
 export default function AddSubCategoryForm() {
@@ -54,7 +55,8 @@ export default function AddSubCategoryForm() {
                         </Field>
                         <span className="text-red-700 text-xs pr-4">{errors.category}</span>
                     </label>
-                    <button type="submit" className="w-full mt-1 py-1 rounded-lg text-gray-500 border-1 border-[1px] border-bl2 bg-bl1 hover:bg-bl2 transition">ایجاد</button>
+                    <SheetClose className="w-full">
+                    <button type="submit" className="w-full mt-1 py-1 rounded-lg text-gray-500 border-1 border-[1px] border-bl2 bg-bl1 hover:bg-bl2 transition">ایجاد</button></SheetClose>
                 </Form>
             )
         }}

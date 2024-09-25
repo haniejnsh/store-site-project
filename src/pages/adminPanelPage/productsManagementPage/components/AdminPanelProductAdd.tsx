@@ -1,15 +1,18 @@
-import {Sheet,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger,} from "@/components/ui/sheet"
+import {Sheet,SheetClose,SheetContent,SheetDescription,SheetHeader,SheetTitle,SheetTrigger,} from "@/components/ui/sheet"
 import {Accordion,AccordionContent,AccordionItem,AccordionTrigger,} from "@/components/ui/accordion"
 import { RiMenuAddFill } from "react-icons/ri"
 import AddCategoryForm from "./AddCategoryForm"
 import AddSubCategoryForm from "./AddSubCategoryForm"
 import AddProductForm from "./AddProductForm"
+import { useState } from "react"
 
 export default function AdminPanelProductAdd() {
+  // const [isOpen, setIsOpen] = useState(false); // کنترل وضعیت باز یا بسته بودن Sheet
+
   return (
-    <Sheet>
+    <Sheet >
         <SheetTrigger >
-          <div className="flex items-center gap-1 font-bold text-slate-500 cursor-pointer hover:text-blue-300 transition">
+          <div onClick={() => setIsOpen(true)} className="flex items-center gap-1 font-bold text-slate-500 cursor-pointer hover:text-blue-300 transition">
             <span>افزودن کالا</span>
             <RiMenuAddFill/>
           </div>
@@ -23,7 +26,7 @@ export default function AdminPanelProductAdd() {
                 <AccordionItem value="item-1">
                   <AccordionTrigger className="hover:text-blue-400 hover:no-underline">افزودن گروه</AccordionTrigger>
                   <AccordionContent>
-                    <AddCategoryForm/>
+                    <AddCategoryForm />
                   </AccordionContent>
                 
                 </AccordionItem>

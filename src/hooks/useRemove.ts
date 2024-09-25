@@ -32,8 +32,9 @@ export default function useRemove(url) {
         if(error.status==500){
             queryClient.invalidateQueries("product")
             toast({
-                description: "Your message has been sent.",
-                duration: 2000,
+                description: "محصول با موفقیت حذف شد",
+                duration: 2500,
+                className:"w-[350px] bg-red-50 border border-red-100 text-gray-500"
               })
         }
         
