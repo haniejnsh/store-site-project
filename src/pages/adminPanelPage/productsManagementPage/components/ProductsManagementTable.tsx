@@ -2,11 +2,12 @@ import {Table,TableBody,TableCaption,TableCell,TableFooter,TableHead,TableHeader
 import useGetReactQuery from "@/hooks/useGetReactQuery"
 import { PRODUCT_URL } from "@/services/api"
 // import { MdDeleteForever } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+// import { FaEdit } from "react-icons/fa";
 import PaginationHook from "@/components/common/Pagination";
 import { useEffect, useState } from "react";
 import { ImSad2 } from "react-icons/im";
 import DeleteModal from "@/components/modals/DeleteModal";
+import EditProductModal from "./EditProductModal";
 
 export default function ProductsManagementTable() {
   const [pageCounter,setPageCounter]=useState(1)
@@ -58,8 +59,9 @@ export default function ProductsManagementTable() {
               <TableCell className="text-center w-[17%]">
                 <div className="flex justify-around">
                   <DeleteModal idPro={pro._id} namePro={pro.name} titleModal={"حذف محصول"} url={PRODUCT_URL}/>
+                  <EditProductModal infoPro={pro}/>
                   {/* <MdDeleteForever className="text-2xl text-blue-400 hover:text-red-500 cursor-pointer transition"/> */}
-                  <FaEdit className="text-lg text-blue-400 hover:text-yellow-500 cursor-pointer transition "/>
+                  {/* <FaEdit className="text-lg text-blue-400 hover:text-yellow-500 cursor-pointer transition "/> */}
                 </div>
               </TableCell>
             </TableRow>
