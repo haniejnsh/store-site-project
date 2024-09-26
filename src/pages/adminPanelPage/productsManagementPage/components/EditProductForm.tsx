@@ -1,7 +1,6 @@
 import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 import { CATEGORY_URL, PRODUCT_URL, SUBCATEGORY_URL } from "@/services/api";
 import { Field, Form, Formik } from "formik"
-import { useRef  } from "react";
 import * as Yup from "yup";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -9,6 +8,7 @@ import { AlertDialogAction, AlertDialogCancel } from "@/components/ui/alert-dial
 import usePatchReactQuery from "@/hooks/usePatchReactQuery";
 
 export default function EditProductForm({infoPro}) {
+
     let checkChange={name:false,category:false,subcategory:false,price:false,quantity:false,brand:false,discount:false,description:false,thumbnail:false,images:false}
     let x=[]
     let subCategories:any[]=[]
@@ -23,7 +23,6 @@ export default function EditProductForm({infoPro}) {
     const categories:{catId:string;catName:string;}[]=[]
     const {data:categoryData,isLoading:catLoading}=useGetReactQueryHelp(CATEGORY_URL,"pro2")
     const {mutate}=usePatchReactQuery(`${PRODUCT_URL}/${infoPro._id}`)
-    const formRef = useRef<HTMLFormElement>(null);
     
 
     if(!catLoading && categoryData){
@@ -69,11 +68,10 @@ const inputItems:{eng:string;per:string;}[]=[
                   if(checkChange[key]){active=true}}   
             if(active){mutate(formData)}
         
-            resetForm();
       };
 
       const handleChange=(act)=>{
-        checkChange[act]=true
+        checkChange[act]=true;
       }
 
 
@@ -102,7 +100,7 @@ const inputItems:{eng:string;per:string;}[]=[
     >
         {({setFieldValue,errors})=>{
             return(
-                <Form ref={formRef} className="flex flex-col w-full rounded-lg  border-[1px] border-bl2 justify-center items-center py-5  px-2 gap-[2px]" >
+                <Form className="flex flex-col w-full rounded-lg  border-[1px] border-bl2 justify-center items-center py-5  px-2 gap-[2px]" >
                     <div className="max-w-full max-h-[440px] overflow-y-scroll pb-2">
                     {inputItems.map(item=>{
                         return(<>
@@ -210,7 +208,7 @@ const inputItems:{eng:string;per:string;}[]=[
                     </div>
                     <div className="flex gap-6 mt-6">
                     
-                        <AlertDialogAction type="submit" className="bg-blue-100 text-gray-500 w-20 border-blue-200 hover:bg-blue-300 border transition">ویرایش</AlertDialogAction>
+                        <AlertDialogAction type="submit" className="bg-blue-100 text-gray-500 w-20 border-blue-200 hover:bg-blue-300 border transition" >ویرایش</AlertDialogAction>
                         <AlertDialogCancel className="bg-blue-100 text-gray-500 w-20 border-blue-200 hover:bg-blue-300 border transition">انصراف</AlertDialogCancel>
                     </div>
                 </Form>

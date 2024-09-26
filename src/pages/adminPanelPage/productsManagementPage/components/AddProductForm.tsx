@@ -1,9 +1,7 @@
 import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 import usePostReactQuery from "@/hooks/usePostReactQuery";
-import { BASE_URL, CATEGORY_URL, PRODUCT_URL, SUBCATEGORY_URL } from "@/services/api";
-import axios from "axios";
+import {  CATEGORY_URL, PRODUCT_URL, SUBCATEGORY_URL } from "@/services/api";
 import { Field, Form, Formik } from "formik"
-import { useEffect,useRef,useState  } from "react";
 import * as Yup from "yup";
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
@@ -12,10 +10,8 @@ import { SheetClose } from "@/components/ui/sheet";
 export default function AddProductForm() {
     
         const categories:{catId:string;catName:string;}[]=[]
-        const {data:categoryData,isLoading:catLoading}=useGetReactQueryHelp(CATEGORY_URL)
+        const {data:categoryData,isLoading:catLoading}=useGetReactQueryHelp(CATEGORY_URL,"pro1")
         const {mutate}=usePostReactQuery(PRODUCT_URL)
-        const formRef = useRef<HTMLFormElement>(null);
-        const editorRef = useRef();
     
         if(!catLoading && categoryData){
             categoryData.data.categories?.map((cat)=>{
@@ -33,20 +29,12 @@ export default function AddProductForm() {
         {eng:"discount",per:"تخفیف محصول"}
     ]
     //////////////////////////////////////////////////////////////////////////////////
-    const [x,setX]=useState()
+    let subcategoryItems
     let subCategories:any[]=[]
-
-    useEffect(() => {
-        const getData = async () => {
-          try {
-            const res = await axios.get(`${BASE_URL}${SUBCATEGORY_URL}?page=1&limit=30`);
-            setX(res.data.data.subcategories)
-          } catch (e) {
-            console.log(e);
-          } 
-        };
-        getData();
-      }, []); 
+    const {data:subcategoryData,isLoading:subcatLoading}=useGetReactQueryHelp(`${SUBCATEGORY_URL}`,"info3")
+    if(!subcatLoading && subcategoryData){
+        subcategoryItems=subcategoryData.data.subcategories
+    }
 
     /////////////////////////////////////////////////////////////////////////////////
 
@@ -99,7 +87,7 @@ export default function AddProductForm() {
         >
             {({setFieldValue,errors})=>{
                 return(
-                    <Form ref={formRef} className="flex flex-col w-full rounded-lg  border-[1px] border-bl2 justify-center items-center py-5  px-2 gap-1" >
+                    <Form  className="flex flex-col w-full rounded-lg  border-[1px] border-bl2 justify-center items-center py-5  px-2 gap-1" >
                         
                         {inputItems.map(item=>{
                             return(
@@ -148,7 +136,7 @@ export default function AddProductForm() {
                             <Field as="select" id="category" name="category" placeholder="گروه محصول" className="text-gray-500 rounded-md py-1 px-4 focus:outline-none border-[1px] border-bl2 focus:border-blue-200" onChange={(e) => {
                                 const value = e.currentTarget.value;
                                 setFieldValue("category", value); 
-                                subCategories=x.filter(item=>item.category==value)
+                                subCategories=subcategoryItems.filter(item=>item.category==value)
                                 }}>
                                 <option disabled  value="" className="bg-bl1 border-[1px] border-bl2 hover:bg-bl2">
                                         "انتخاب گروه محصول"
