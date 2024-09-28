@@ -2,10 +2,11 @@ import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 import { PRODUCT_URL } from "@/services/api";
 import { NavLink } from "react-router-dom";
 import { RiArrowLeftSFill } from "react-icons/ri";
+import { ProductsSlider } from "./ProductsSlider";
 
 export default function ProductsOfCategory({category}) {
     console.log("cat" , category);
-    const {isLoading,data,isError,error, refetch}=useGetReactQueryHelp(`${PRODUCT_URL}?category=${category._id}&page=1&limit=50`,category._id)
+    // const {isLoading,data,isError,error, refetch}=useGetReactQueryHelp(`${PRODUCT_URL}?category=${category._id}&page=1&limit=50`,category._id)
     // if(isLoading){
     //     return (
     //       <div className="flex flex-col py-8">
@@ -34,7 +35,9 @@ export default function ProductsOfCategory({category}) {
             <RiArrowLeftSFill className="text-3xl"/>
             <NavLink to={"/adminlogin"} className="w-full text-lg">{category.name}</NavLink>
         </div>
-        <div className="border h-36 bg-white"></div>
+        <div className="border  bg-white ">
+            <ProductsSlider category={category}/>
+        </div>
     </div>
   )
 }
