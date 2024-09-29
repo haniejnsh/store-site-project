@@ -47,6 +47,7 @@ body{
   max-width: 100%; /* تنظیم حداکثر عرض */
 }
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;

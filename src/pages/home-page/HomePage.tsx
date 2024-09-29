@@ -3,31 +3,39 @@ import ProductsOfCategory from "./components/ProductsOfCategory";
 import { Slider } from "./components/Slider";
 import useGetReactQuery from "@/hooks/useGetReactQuery";
 import { ImSad2 } from "react-icons/im";
+import { useEffect } from "react";
 
 export default function HomePage() {
+
   const {isLoading,data,isError,error, refetch}=useGetReactQuery(`${CATEGORY_URL}`)
+
+  useEffect(() => {
+    refetch()
+  }, [refetch]);
+
   if(isLoading){
     return (
       <div className="flex flex-col py-8">
         <Slider/>
-        <div className="flex justify-center items-center mt-20 text-blue-400 text-xl font-bold">در حال بارگزاری . . .</div>
+        <div className="flex justify-center items-center my-20 text-blue-400 text-xl font-bold">در حال بارگزاری . . .</div>
       </div>
     )
   }
 
   if(isError){
+    
     return (
       <div className="flex flex-col py-8">
         <Slider/>
-        <div className="flex justify-center mt-20 text-red-500 items-center gap-1">
+        <div className="flex justify-center my-20 text-red-500 items-center gap-1">
         <ImSad2 />
-        <span>{error.response.data.message}</span>
+        <span>"متاسفانه با خطلا رو به رو شدید"</span>
       </div>
       </div>
     )
   }
   return (
-    <div className="flex flex-col py-8 items-center gap-4">
+    <div className="flex flex-col py-8 items-center gap-10">
       <Slider/>
       <div className="flex flex-col w-[80%]">
         {data.data.categories?.map(cat=>{

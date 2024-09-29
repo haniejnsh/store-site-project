@@ -7,7 +7,7 @@ export default function useGetReactQuery(urlGet:string) {
     queryFn: async () => {
       const res = await axios.get(`${urlGet}`);
       return res.data;
-    },
+    }
   });
   return query
 }

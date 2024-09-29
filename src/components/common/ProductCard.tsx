@@ -1,9 +1,11 @@
+import { NavLink } from "react-router-dom"
+
 export default function ProductCard({product}) {
 
     if(product.discount!=0){
         const newPrice=product.price-(product.price*(product.discount/100))
         return(
-            <div className="flex flex-col h-[270px] w-[200px] border border-bl1 rounded-lg px-2 py-2 items-center text-gray-500 shadow-lg shadow-bl2 gap-1">
+            <NavLink className="flex flex-col h-[285px] w-[200px] border border-bl1 rounded-lg px-2 py-2 items-center text-gray-500 shadow-lg shadow-bl2 gap-1 hover:shadow-blue-300 transition">
                 <div className="h-[55%] flex justify-center">
                     <img src={`http://${product?.images[0]}`} alt="product" className="w-full h-full"/>
                 </div>
@@ -25,11 +27,11 @@ export default function ProductCard({product}) {
                     </div>   
                 </div>
                 
-            </div>
+            </NavLink>
         )
     }
     return (
-        <div className="flex flex-col h-[270px] w-[215px] border border-bl1 rounded-lg px-2 py-2 items-center text-gray-500 shadow-lg shadow-bl2 gap-1">
+        <NavLink className="flex flex-col h-[285px] w-[215px] border border-bl1 rounded-lg px-2 py-2 items-center text-gray-500 shadow-lg shadow-bl2 gap-1 hover:shadow-blue-300 transition">
             <div className="h-[55%] flex justify-center">
                 <img src={`http://${product?.images[0]}`} alt="product" className="w-full h-full"/>
             </div>
@@ -38,6 +40,6 @@ export default function ProductCard({product}) {
                 <span>{product.price}</span>
                 <span>تومان</span>
             </div>
-        </div>
+        </NavLink>
   )
 }
