@@ -10,7 +10,7 @@ export default function MainLayout() {
         <TopHeader/>
         <BottomHeader/>
       </div>
-      <div className="pt-[120px]">
+      <div className="pt-[130px]">
         <Outlet/>
         <Footer/>
       </div>

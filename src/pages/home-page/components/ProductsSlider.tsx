@@ -22,7 +22,7 @@ export function ProductsSlider({ category }) {
       <div className="flex justify-center my-20 text-red-500 items-center gap-1">
         {/* <ImSad2 /> */}
         <ImSad2/>
-        <span>"متاسفانه با خطلا رو به رو شدید"</span>
+        <span>"متاسفانه با خطا رو به رو شدید"</span>
       </div>
     );
   }

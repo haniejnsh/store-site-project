@@ -29,13 +29,13 @@ export default function HomePage() {
         <Slider/>
         <div className="flex justify-center my-20 text-red-500 items-center gap-1">
         <ImSad2 />
-        <span>"متاسفانه با خطلا رو به رو شدید"</span>
+        <span>"متاسفانه با خطا رو به رو شدید"</span>
       </div>
       </div>
     )
   }
   return (
-    <div className="flex flex-col py-8 items-center gap-10">
+    <div className="flex flex-col py-7 items-center gap-10">
       <Slider/>
       <div className="flex flex-col w-[80%]">
         {data.data.categories?.map(cat=>{
