@@ -6,10 +6,14 @@ import Footer from "../components/navborders/Footer";
 export default function MainLayout() {
   return (
     <>
+      <div className="fixed z-10 flex bg-white flex-col w-full">
         <TopHeader/>
         <BottomHeader/>
+      </div>
+      <div className="pt-[120px]">
         <Outlet/>
         <Footer/>
+      </div>
     </>
   )
 }
