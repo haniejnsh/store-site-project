@@ -29,7 +29,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col py-8 items-center gap-4">
       <Slider/>
-      <div className="flex flex-col w-[80%] ">
+      <div className="flex flex-col w-[80%]">
         {data.data.categories?.map(cat=>{
           return(
             <ProductsOfCategory category={cat} />
