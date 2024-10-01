@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import HomePage from "../pages/home-page/HomePage";
-import CategoryPage from "../pages/category-page/CategoryPage";
 import DetailsPage from "../pages/details-page/DatailsPage";
 import CartPage from "../pages/cart-page/CartPage";
 import ShippingPage from "../pages/shipping-page/ShippingPage";
@@ -13,6 +12,7 @@ import InventoryManagementPage from "../pages/adminPanelPage/inventory-managemen
 import UserLoginPage from "../pages/login-page/UserLoginPage";
 import AdminLoginPage from "../pages/login-page/AdminLoginPage";
 import RegisterPage from "../pages/register-page/RegisterPage";
+import FiltersPage from "../pages/filters-page/FiltersPage";
 
 
 const routes: RouteObject[] = ([
@@ -25,8 +25,8 @@ const routes: RouteObject[] = ([
                 element:<HomePage/>
             },
             {
-                path:"/category/:categoryId",
-                element:<CategoryPage/>
+                path:"/filters",
+                element:<FiltersPage/>
             },
             {
                 path:"/details/:productId",
