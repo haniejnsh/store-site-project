@@ -12,7 +12,7 @@ import InventoryManagementPage from "../pages/adminPanelPage/inventory-managemen
 import UserLoginPage from "../pages/login-page/UserLoginPage";
 import AdminLoginPage from "../pages/login-page/AdminLoginPage";
 import RegisterPage from "../pages/register-page/RegisterPage";
-import FiltersPage from "../pages/products-list-page/ProductsListPage";
+import ProductsListPage from "../pages/products-list-page/ProductsListPage";
 
 
 const routes: RouteObject[] = ([
@@ -25,8 +25,8 @@ const routes: RouteObject[] = ([
                 element:<HomePage/>
             },
             {
-                path:"/filters",
-                element:<FiltersPage/>
+                path:"/products",
+                element:<ProductsListPage/>
             },
             {
                 path:"/details/:productId",

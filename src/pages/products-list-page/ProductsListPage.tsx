@@ -1,19 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import Filters from "./components/Filters";
 import Sort from "./components/Sort";
 import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 import { PRODUCT_URL } from "@/services/api";
 import { ImSad2 } from "react-icons/im";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import ProductCard from "@/components/common/ProductCard";
+import ProductsListHeader from "./components/ProductsListHeader";
 
 export default function ProductsListPage() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const catOrSub=(searchParams.get("category"))?`category=${searchParams.get("category")}&`:(searchParams.get("subcategory"))?`subcategory=${searchParams.get("subcategory")}&`:""
+  
   const { isLoading, data, isError, error, refetch } = useGetReactQueryHelp(
-    `${PRODUCT_URL}?page=1&limit=25`,"productList"
+    `${PRODUCT_URL}?${catOrSub}page=1&limit=25`,"productList"
   );
   useEffect(() => {
     refetch()
-  }, [refetch]);
+  }, [refetch,searchParams]);
+  console.log("search param",searchParams.get("category") || "");
+
+  
   if (isLoading) {
     return (
       <div className="flex justify-center items-center mt-20 text-blue-400 text-xl font-bold">
@@ -35,11 +42,7 @@ export default function ProductsListPage() {
   
   return (
     <div className="flex flex-col w-[80%] mx-auto text-gray-500">
-      <div className="flex gap-2 px-2 py-4 text-sm ">
-        <NavLink to={"#"} className="hover:text-blue-300 transition">{"یخچال فریزر"}</NavLink>
-        <span>/</span>
-        <NavLink to={"#"} className="hover:text-blue-300 transition">{"دوقلو"}</NavLink>
-      </div>
+      <ProductsListHeader category={catOrSub} searchParams={searchParams} setSearchParams={setSearchParams}/>
       <div className="flex gap-3">
         <div className="flex w-[20%]"><Filters/></div>
         <div className="flex w-[80%] flex-col gap-6">

@@ -2,7 +2,7 @@ import useGetReactQuery from "@/hooks/useGetReactQuery";
 import { PRODUCT_URL } from "@/services/api";
 import { useEffect, useState } from "react";
 import { ImSad2 } from "react-icons/im";
-import { NavLink, useParams } from "react-router-dom"
+import { NavLink, useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FaStar } from "react-icons/fa";
 import { HiOutlineEmojiSad,HiOutlineEmojiHappy  } from "react-icons/hi";
@@ -14,6 +14,8 @@ import { useNumberConverter } from "@/hooks/useNumberConverter";
 
 export default function DatailsPage() {
   // const loc=useLocation()
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate=useNavigate()
   const params=useParams()
   const product=params.productId.slice(1)
   console.log("param",product)
@@ -60,9 +62,25 @@ export default function DatailsPage() {
       <div className="w-[60%] flex flex-col text-gray-500">
         {/* //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
         <p className="flex mb-2 text-sm text-gray-400 gap-1">
-          <NavLink to={"#"} className="hover:text-gray-500 transition">{information.category.name}</NavLink>
+          <div onClick={()=>{
+                              // const newParams = new URLSearchParams(searchParams); 
+                              searchParams.delete("subcategory")
+                              searchParams.set("category", information.category._id);
+                              navigate({
+                                pathname: "/products",
+                                search: `?${searchParams.toString()}`,
+                              });
+                            }} className="hover:text-blue-300 transition cursor-pointer">{information.category.name}</div>
           <span>/</span>
-          <NavLink to={"#"} className="hover:text-gray-500 transition">{information.subcategory.name}</NavLink>
+          <div onClick={()=>{
+                              // const newParams = new URLSearchParams(searchParams); 
+                              searchParams.delete("category")
+                              searchParams.set("subcategory", information.subcategory._id);
+                              navigate({
+                                pathname: "/products",
+                                search: `?${searchParams.toString()}`,
+                              });
+                            }} className="hover:text-blue-300 transition cursor-pointer">{information.subcategory.name}</div>
         </p>
         {/*  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/}
         <div className="flex gap-3">

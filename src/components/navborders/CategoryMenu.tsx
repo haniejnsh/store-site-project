@@ -5,11 +5,13 @@ import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 import { CATEGORY_URL } from "@/services/api";
 import { ImSad2 } from "react-icons/im";
 import SubcategoryMenu from "./SubcategoryMenu";
+import { useNavigate, useSearchParams } from "react-router-dom";
   
   export function CategoryMenu() {
     // const [idcategory,setIdCategory]=useState("")
     // console.log("use state : ",idcategory);
-    
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate=useNavigate()
     const { isLoading, data, isError, error, refetch } = useGetReactQueryHelp(
         `${CATEGORY_URL}?page=1&limit=25`,"categorymenu"
       );
@@ -58,7 +60,15 @@ import SubcategoryMenu from "./SubcategoryMenu";
                     <>
                     <MenubarSeparator/>
                         <MenubarSub >
-                            <MenubarSubTrigger>{cat.name}</MenubarSubTrigger>
+                            <MenubarSubTrigger onClick={()=>{
+                              // const newParams = new URLSearchParams(searchParams); 
+                              searchParams.delete("subcategory")
+                              searchParams.set("category", cat._id);
+                              navigate({
+                                pathname: "/products",
+                                search: `?${searchParams.toString()}`,
+                              });
+                            }}>{cat.name}</MenubarSubTrigger>
                             <SubcategoryMenu category={cat}/>
                         </MenubarSub>
                     <MenubarSeparator />

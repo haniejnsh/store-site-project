@@ -3,8 +3,11 @@ import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
 import { SUBCATEGORY_URL } from "@/services/api";
 import { useEffect } from "react";
 import { ImSad2 } from "react-icons/im";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function SubcategoryMenu({category}) {
+    const [searchParams, setSearchParams] = useSearchParams();
+    const navigate=useNavigate()
     const { isLoading, data, isError, error, refetch } = useGetReactQueryHelp(
         `${SUBCATEGORY_URL}?category=${category._id}&page=1&limit=25`,`${category._id}aa`
       );
@@ -34,7 +37,14 @@ export default function SubcategoryMenu({category}) {
     <MenubarSubContent>
         {subData?.map(sub=>{
             return(
-                <MenubarItem>{sub.name}</MenubarItem>
+                <MenubarItem onClick={()=>{
+                  searchParams.delete("category")
+                  searchParams.set("subcategory",sub._id);
+                  navigate({
+                    pathname: "/products",
+                    search: `?${searchParams.toString()}`,
+                  });
+                }}>{sub.name}</MenubarItem>
             )
         })}
     </MenubarSubContent>

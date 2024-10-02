@@ -39,14 +39,14 @@ export default function Filters() {
                         <label htmlFor="expensive" className="flex flex-col justify-between gap-1 ">
                             <span className="px-1">گرانترین</span>
                             <div className="flex justify-between border border-bl2 h-10 px-3 items-center rounded-lg text-gray-400 gap-3">
-                                <input type="number" id="expensive" placeholder="000,000,000" className="grow focus:outline-none"/>
+                                <input type="number" id="expensive" placeholder="000,000,000" className="grow focus:outline-none w-full"/>
                                 <span>تومان</span>
                             </div>
                         </label>
                         <label htmlFor="expensive" className="flex flex-col justify-between gap-1 ">
                             <span className="px-1">ارزانترین</span>
                             <div className="flex justify-between border border-bl2 h-10 px-3 items-center rounded-lg text-gray-400 gap-3">
-                                <input type="number" id="expensive" placeholder="000,000,000" className="grow focus:outline-none"/>
+                                <input type="number" id="expensive" placeholder="000,000,000" className="grow focus:outline-none w-full"/>
                                 <span>تومان</span>
                             </div>
                         </label>
