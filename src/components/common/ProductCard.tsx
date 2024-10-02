@@ -6,7 +6,7 @@ export default function ProductCard({product}) {
     if(product.discount!=0){
         const newPrice=useNumberConverter(product.price-(product.price*(product.discount/100)))
         return(
-            <NavLink to={`/details/:${product._id}`} className="flex flex-col h-[285px] w-[200px] border border-bl1 rounded-lg px-2 py-2 items-center text-gray-500 shadow-lg shadow-bl2 gap-1 hover:shadow-blue-300 transition">
+            <NavLink to={`/details/:${product._id}`} className="flex flex-col h-[285px] max-w-[205px] w-[205px] border border-bl1 rounded-lg px-2 py-2 items-center text-gray-500 shadow-lg shadow-bl2 gap-1 hover:shadow-blue-300 transition">
                 <div className="h-[55%] flex justify-center">
                     <img src={`http://${product?.images[0]}`} alt="product" className="w-full h-full"/>
                 </div>
@@ -32,7 +32,7 @@ export default function ProductCard({product}) {
         )
     }
     return (
-        <NavLink to={`/details/:${product._id}`} className="flex flex-col h-[285px] w-[215px] border border-bl1 rounded-lg px-2 py-2 items-center text-gray-500 shadow-lg shadow-bl2 gap-1 hover:shadow-blue-300 transition">
+        <NavLink to={`/details/:${product._id}`} className="flex flex-col h-[285px] w-[205px] max-w-[205px] border border-bl1 rounded-lg px-2 py-2 items-center text-gray-500 shadow-lg shadow-bl2 gap-1 hover:shadow-blue-300 transition">
             <div className="h-[55%] flex justify-center">
                 <img src={`http://${product?.images[0]}`} alt="product" className="w-full h-full"/>
             </div>

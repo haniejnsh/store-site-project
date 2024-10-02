@@ -3,7 +3,7 @@ import { Switch } from "@/components/ui/switch"
 
 export default function Filters() {
   return (
-    <form className="flex flex-col border-l border-r min-h-[500px] border-bl2 w-full px-3 pb-2 pt-3 text-gray-500">
+    <form className="flex flex-col border-l border-r border-t rounded-lg min-h-[500px] border-bl2 w-full px-3 pb-2 pt-3 text-gray-500">
         <div className="flex justify-between items-center">
             <h1 className="font-bold text-lg">فیلترها</h1>
             <input type="button" value={"حذف فیلترها"} className="text-red-400 text-sm hover:text-red-300 cursor-pointer transition"/>
