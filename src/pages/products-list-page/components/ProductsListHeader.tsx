@@ -6,7 +6,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function ProductsListHeader({category,searchParams,setSearchParams}) {
   const detail=category.split("=")
-  console.log("split",category);
   const id=detail[1]?.slice(0, -1)
   const url=(detail[0]=="category")?CATEGORY_URL:(detail[0]=="subcategory")?SUBCATEGORY_URL:""
   const { isLoading, data, isError, error, refetch } = useGetReactQueryHelp(

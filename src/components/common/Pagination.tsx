@@ -7,7 +7,6 @@ export default function PaginationHook({counterSet,pageNumber,totalPage}) {
     const changeCounter=(e)=>{
         const x=Number(e.target.innerHTML)
         counterSet(x)
-        
     }
     return (
         <div className="flex justify-center py-2 items-center gap-2 text-gray-500">
