@@ -1,7 +1,22 @@
 import {Accordion,AccordionContent,AccordionItem,AccordionTrigger } from "@/components/ui/accordion"
 import { Switch } from "@/components/ui/switch"
+import useGetReactQueryHelp from "@/hooks/useGetReactQueryHelp";
+import { PRODUCT_URL } from "@/services/api";
 
-export default function Filters() {
+export default function Filters({product}) {
+    const { isLoading, data, isError, refetch } = useGetReactQueryHelp(
+        `${PRODUCT_URL}?page=1&limit=1000`,
+        "productFilterBrand"
+      );
+    let brandList=[]
+    if(data && !isLoading){
+        data?.data?.products?.forEach(pro=>{
+            if(!brandList.includes(pro.brand)){
+                brandList.push(pro.brand)
+            }
+        })
+      }
+    
   return (
     <form className="flex flex-col border-l border-r border-t rounded-lg min-h-[500px] border-bl2 w-full px-3 pb-2 pt-3 text-gray-500">
         <div className="flex justify-between items-center">
@@ -13,22 +28,14 @@ export default function Filters() {
                 <AccordionTrigger className="font-bold hover:text-blue-300">برند</AccordionTrigger>
                 <AccordionContent>
                     <div className="flex flex-col px-3 gap-2">
-
-                    <label for="vehicle1" className="flex justify-between items-center">
-                        <span>sam</span>
-                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike"/>
-                    </label>
-                    
-                    <label for="vehicle2" className="flex justify-between items-center">
-                        <span>emersun</span>
-                    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car"/>
-                    </label>
-
-                    <label for="vehicle3" className="flex justify-between items-center">
-                        <span>snowa</span>
-                        <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat"/>
-                    </label>
-
+                        {brandList?.map((br,index)=>{
+                            return(
+                                <label for={`brand${index}`} className="flex justify-between items-center">
+                                    <span>{br}</span>
+                                    <input type="checkbox" id={`brand${index}`} name={`brand${index}`} value={`brand${index}`}/>
+                                </label>
+                            )
+                        })}
                     </div>
                 </AccordionContent>
             </AccordionItem>

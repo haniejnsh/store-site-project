@@ -178,6 +178,7 @@ export default function ProductsListPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const initialPage = parseInt(searchParams.get("page")) || 1;
   const [pageCounter, setPageCounter] = useState(initialPage);
+  const [dataShow,setDataShow]=useState([])
 
   const catOrSub = (searchParams.get("category")) 
     ? `category=${searchParams.get("category")}&`
@@ -187,7 +188,7 @@ export default function ProductsListPage() {
 
 
   const { isLoading, data, isError, refetch } = useGetReactQueryHelp(
-    `${PRODUCT_URL}?${catOrSub}sort=${(searchParams.get("sort")) || ""}&page=${pageCounter}&limit=4`,
+    `${PRODUCT_URL}?${catOrSub}sort=${(searchParams.get("sort")) || ""}&page=${pageCounter}&limit=8`,
     "productList"
   );
 
@@ -201,6 +202,12 @@ export default function ProductsListPage() {
     }
   }, [searchParams.get("category"), searchParams.get("subcategory"),searchParams.get("sort")]);
 
+
+  useEffect(() => {
+    if(data){
+      setDataShow(data.data.products)
+    }
+  }, [data]);
   
   useEffect(() => {
     setSearchParams((prev) => {
@@ -227,17 +234,21 @@ export default function ProductsListPage() {
     );
   }
 
-  const productsData = data.data.products;
+  // const dataShow = data.data.products;
+  // setDataShow(data.data.products)
+  // useEffect(() => {
+  //   setDataShow(data.data.products)
+  // }, []);
 
   return (
     <div className="flex flex-col w-[80%] mx-auto text-gray-500">
       <ProductsListHeader category={catOrSub} searchParams={searchParams} setSearchParams={setSearchParams} />
       <div className="flex gap-3">
-        <div className="flex w-[20%]"><Filters /></div>
+        <div className="flex w-[20%]"><Filters product={dataShow}/></div>
         <div className="flex w-[80%] flex-col gap-6">
           <Sort searchParams={searchParams} setSearchParams={setSearchParams}/>
           <div className="grid grid-cols-4 gap-6 px-1 ">
-            {productsData.map(pro => (
+            {dataShow.map(pro => (
               <ProductCard key={pro._id} product={pro} />
             ))}
           </div>
