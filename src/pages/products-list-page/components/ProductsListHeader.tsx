@@ -47,6 +47,7 @@ export default function ProductsListHeader({category,searchParams,setSearchParam
         <div onClick={()=>{
           setSearchParams((prev) => {
           searchParams.delete("subcategory")
+          searchParams.delete("sort")
           searchParams.set("category", data.data.subcategory.category._id);
           return searchParams
         });}} className="hover:text-blue-300 transition cursor-pointer">{data.data.subcategory?.category?.name}</div>

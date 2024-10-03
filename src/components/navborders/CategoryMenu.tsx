@@ -63,6 +63,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
                             <MenubarSubTrigger onClick={()=>{
                               // const newParams = new URLSearchParams(searchParams); 
                               searchParams.delete("subcategory")
+                              searchParams.delete("sort")
                               searchParams.set("category", cat._id);
                               navigate({
                                 pathname: "/products",

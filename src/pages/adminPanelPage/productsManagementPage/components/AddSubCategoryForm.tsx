@@ -8,7 +8,7 @@ import { SheetClose } from "@/components/ui/sheet";
 
 export default function AddSubCategoryForm() {
     const {mutate}=usePostReactQuery(SUBCATEGORY_URL)
-    const {data,isLoading}=useGetReactQueryHelp(CATEGORY_URL)
+    const {data,isLoading}=useGetReactQueryHelp(CATEGORY_URL,"categoryadd")
     const categories:{catId:string;catName:string;}[]=[]
     
 

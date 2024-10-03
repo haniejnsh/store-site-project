@@ -1,7 +1,7 @@
 import { useState } from "react"
 
-export default function Sort() {
-    const options=[["پیش فرض",""],["کمترین قیمت","pricLow"],["بیشترین قیمت","priceHigh"],["تخفیف","discount"]]
+export default function Sort({searchParams,setSearchParams}) {
+    const options=[["پیش فرض",""],["کمترین قیمت","price"],["بیشترین قیمت","-price"],["تخفیف","-discount"]]
     const [selected,setSelected]=useState("")
   return (
     <div className="flex bg-bl1 h-8 items-center text-sm px-3 gap-3">
@@ -10,9 +10,15 @@ export default function Sort() {
             {options.map(op=>{
                 return(
                     <div
-                     onClick={()=>setSelected(op[1])}
+                     onClick={()=>{
+                      setSearchParams((prev) => {
+                        searchParams.set("sort", op[1]);
+                        return searchParams
+                      });
+                      setSelected(op[1]);
+                    }}
                      className={`cursor-pointer transition ${
-                      selected === op[1] ? "text-blue-500" : "text-gray-500"
+                      searchParams.get("sort") === op[1] ? "text-blue-500" : "text-gray-500"
                     } hover:text-blue-300`}
                      >{op[0]}</div>
                 )

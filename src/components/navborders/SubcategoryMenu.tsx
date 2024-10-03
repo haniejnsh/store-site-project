@@ -39,6 +39,7 @@ export default function SubcategoryMenu({category}) {
             return(
                 <MenubarItem onClick={()=>{
                   searchParams.delete("category")
+                  searchParams.delete("sort")
                   searchParams.set("subcategory",sub._id);
                   navigate({
                     pathname: "/products",

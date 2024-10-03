@@ -185,8 +185,9 @@ export default function ProductsListPage() {
     ? `subcategory=${searchParams.get("subcategory")}&`
     : "";
 
+
   const { isLoading, data, isError, refetch } = useGetReactQueryHelp(
-    `${PRODUCT_URL}?${catOrSub}page=${pageCounter}&limit=4`,
+    `${PRODUCT_URL}?${catOrSub}sort=${(searchParams.get("sort")) || ""}&page=${pageCounter}&limit=4`,
     "productList"
   );
 
@@ -195,10 +196,10 @@ export default function ProductsListPage() {
   }, [refetch, searchParams]);
 
   useEffect(() => {
-    if (searchParams.get("category") || searchParams.get("subcategory")) {
+    if (searchParams.get("category") || searchParams.get("subcategory") || searchParams.get("sort")) {
       setPageCounter(1);  
     }
-  }, [searchParams.get("category"), searchParams.get("subcategory")]);
+  }, [searchParams.get("category"), searchParams.get("subcategory"),searchParams.get("sort")]);
 
   
   useEffect(() => {
@@ -234,7 +235,7 @@ export default function ProductsListPage() {
       <div className="flex gap-3">
         <div className="flex w-[20%]"><Filters /></div>
         <div className="flex w-[80%] flex-col gap-6">
-          <Sort />
+          <Sort searchParams={searchParams} setSearchParams={setSearchParams}/>
           <div className="grid grid-cols-4 gap-6 px-1 ">
             {productsData.map(pro => (
               <ProductCard key={pro._id} product={pro} />

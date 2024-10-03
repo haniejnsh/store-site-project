@@ -31,7 +31,7 @@ export default function AddProductForm() {
     //////////////////////////////////////////////////////////////////////////////////
     let subcategoryItems
     let subCategories:any[]=[]
-    const {data:subcategoryData,isLoading:subcatLoading}=useGetReactQueryHelp(`${SUBCATEGORY_URL}`,"info3")
+    const {data:subcategoryData,isLoading:subcatLoading}=useGetReactQueryHelp(`${SUBCATEGORY_URL}?page=1&limit=50`,"info3")
     if(!subcatLoading && subcategoryData){
         subcategoryItems=subcategoryData.data.subcategories
     }
