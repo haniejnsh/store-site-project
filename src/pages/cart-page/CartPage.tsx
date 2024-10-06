@@ -1,5 +1,18 @@
+import CartProductCard from "./components/CartProductCard";
+import PaymentCard from "./components/PaymentCard";
+
 export default function CartPage() {
   return (
-    <div>CartPage</div>
+    <div className="w-[80%] flex flex-col mx-auto py-6">
+      <div className="flex ">
+        <div className="flex flex-col w-[75%]">
+          <CartProductCard/>
+        </div>
+        <div className="flex flex-col w-[25%]">
+          <PaymentCard/>
+          <div>ثبت سفارش</div>
+        </div>
+      </div>
+    </div>
   )
 }
