@@ -14,8 +14,8 @@ export default function CartProductCard() {
 
         <div className="flex flex-col w-[25%] px-3">
             <div className="flex justify-center gap-2 items-center">
-                <p className="flex text-sm text-white bg-red-500 justify-center items-center w-7 h-5 rounded-md">
-                  <span>{useNumberConverter(3)}</span>
+                <p className="flex text-sm text-white bg-red-500 justify-center items-center w-8 h-5 rounded-md">
+                  <span>{useNumberConverter(13)}</span>
                   <span>%</span>
                 </p>
                 <p className="flex gap-1 items-center">
