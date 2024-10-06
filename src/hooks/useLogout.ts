@@ -16,6 +16,7 @@ export default function useLogout() {
             
             localStorage.setItem("access", "");
             localStorage.setItem("refresh", "");
+            localStorage.setItem("role", "");
             navigate("/")
             toast({
               description: "شما از حساب مدیریت خود خارج شدید",

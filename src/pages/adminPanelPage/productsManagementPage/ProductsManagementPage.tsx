@@ -2,7 +2,7 @@ import ProductsManagementTable from "./components/ProductsManagementTable";
 import AdminPanelProductAdd from "./components/AdminPanelProductAdd";
 import { useToast } from "@/hooks/use-toast"
 
-export default function ProductsManagmentPage() {
+export default function ProductsManagementPage() {
   // const { toast } = useToast()
   return (
     <div className="flex w-full">

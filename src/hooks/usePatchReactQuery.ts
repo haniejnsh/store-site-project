@@ -19,7 +19,10 @@ export default function usePatchReactQuery(urlPatch:string) {
     },
     onSuccess: (data) => {
         console.log("data patch",data);
-        queryClient.invalidateQueries("product")
+        // queryClient.invalidateQueries("product")
+        queryClient.invalidateQueries({
+          queryKey:["product"]
+        })
         // navigate("/admin/productmanagement")
         // if(urlPost=="/categories"){
         //   toast({

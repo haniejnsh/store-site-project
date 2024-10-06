@@ -6,12 +6,12 @@ import CartPage from "../pages/cart-page/CartPage";
 import ShippingPage from "../pages/shipping-page/ShippingPage";
 import ResultPage from "../pages/result-page/ResultPage";
 import AdminPanelLayout from "../layouts/AdminPanelLayout";
-import ProductsManagmentPage from "../pages/adminPanelPage/productsManagementPage/ProductsManagmentPage";
+import ProductsManagementPage from "../pages/adminPanelPage/productsManagementPage/ProductsManagementPage";
 import OrdersManagementPage from "../pages/adminPanelPage/orders-management-page/OrdersManagementPage";
 import InventoryManagementPage from "../pages/adminPanelPage/inventory-management-page/InventoryManagementPage";
 import UserLoginPage from "../pages/login-page/UserLoginPage";
 import AdminLoginPage from "../pages/login-page/AdminLoginPage";
-import RegisterPage from "../pages/register-page/RegisterPage";
+import UserRegisterPage from "../pages/register-page/UserRegisterPage";
 import ProductsListPage from "../pages/products-list-page/ProductsListPage";
 
 
@@ -52,7 +52,7 @@ const routes: RouteObject[] = ([
         children:[
             {
                 path:"/admin/productmanagement",
-                element:<ProductsManagmentPage/>
+                element:<ProductsManagementPage/>
             },
             {
                 path:"/admin/ordersmanagement",
@@ -74,7 +74,7 @@ const routes: RouteObject[] = ([
     },
     {
         path:"/userregister",
-        element:<RegisterPage/>
+        element:<UserRegisterPage/>
     }
 ])
 

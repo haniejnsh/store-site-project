@@ -8,7 +8,7 @@ import ProductCard from '@/components/common/ProductCard';
 import { ImSad2 } from 'react-icons/im';
 
 export function ProductsSlider({ category }) {
-  const { isLoading, data, isError, error, refetch } = useGetReactQueryHelp(`${PRODUCT_URL}?category=${category._id}&page=1&limit=50`, category._id);
+  const { isLoading, data, isError, error, refetch } = useGetReactQueryHelp(`${PRODUCT_URL}?category=${category._id}&page=1&limit=6`, category._id);
 
   if (isLoading) {
     return (

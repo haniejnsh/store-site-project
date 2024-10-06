@@ -20,10 +20,19 @@ export default function useLogin(rol) {
     onSuccess: (data) => {
         localStorage.setItem("access", data.token.accessToken);
         localStorage.setItem("refresh", data.token.refreshToken);
-        if(rol=="مدیریت"){
+        localStorage.setItem("role", data.data.user.role);
+        if(data.data.user.role=="ADMIN"){
           navigate("/admin/productmanagement")
           toast({
             description: "شما با موفقیت به حساب مدیریت خود وارد شدید",
+            duration: 2500,
+            className:"w-[350px] bg-blue-50 border border-blue-100 text-gray-500"
+          })
+        }
+        else if(data.data.user.role=="USER"){
+          // navigate("/admin/productmanagement")
+          toast({
+            description: "شما با موفقیت به حساب کاربری خود وارد شدید",
             duration: 2500,
             className:"w-[350px] bg-blue-50 border border-blue-100 text-gray-500"
           })
