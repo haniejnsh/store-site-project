@@ -2,7 +2,7 @@ import useGetReactQuery from "@/hooks/useGetReactQuery";
 import { PRODUCT_URL } from "@/services/api";
 import { useEffect, useState } from "react";
 import { ImSad2 } from "react-icons/im";
-import { NavLink, useNavigate, useParams, useSearchParams } from "react-router-dom"
+import { useNavigate, useParams, useSearchParams } from "react-router-dom"
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { FaStar } from "react-icons/fa";
 import { HiOutlineEmojiSad,HiOutlineEmojiHappy  } from "react-icons/hi";
@@ -11,6 +11,8 @@ import { IoShareSocialOutline } from "react-icons/io5";
 import { ProductPicturesSlider } from "./components/ProductPicturesSlider";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { useNumberConverter } from "@/hooks/useNumberConverter";
+import { useDispatch,useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "@/redux/cart/cartSlice";
 
 export default function DatailsPage() {
   // const loc=useLocation()
@@ -24,7 +26,9 @@ export default function DatailsPage() {
   const [interested,setInterested]=useState(false)
   const colors=["#021526","#686D76","#FFFFFF"]
   console.log(data);
-  
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((store) => store.cart);
+  console.log("button cartitems: ",cartItems);
 
   useEffect(() => {
     refetch()
@@ -47,10 +51,8 @@ export default function DatailsPage() {
   }
   console.log("data",data);
   if(data.data.product){
-    console.log("yeeeeeeeeeeeeeeeeeeeees");
   
   const information=data.data.product
-  // const newPrice=Number(information.price-(information.price*(information.discount/100)))
   const newPrice=useNumberConverter(Number(information.price-(information.price*(information.discount/100))))
   return (
     <div className="flex w-[80%] mx-auto mt-8 gap-10">
@@ -181,13 +183,13 @@ export default function DatailsPage() {
               )}
 
             {(orderCount==0)?(
-              <div onClick={()=>setOrderCount(t=>t+1)} className="bg-blue-500 flex justify-center items-center rounded-lg text-white h-14 hover:bg-blue-400 mt-4 text-lg font-bold shadow-inner shadow-blue-200 cursor-pointer transition">افزودن به سبد خرید</div>
+              <div onClick={()=>{setOrderCount(t=>t+1);dispatch(addToCart(information));}} className="bg-blue-500 flex justify-center items-center rounded-lg text-white h-14 hover:bg-blue-400 mt-4 text-lg font-bold shadow-inner shadow-blue-200 cursor-pointer transition">افزودن به سبد خرید</div>
             ):(
               <div className="flex justify-center items-center h-14 mt-4 gap-3">
                 <div className="flex items-center w-[75%] border border-bl2 rounded-lg h-full justify-around text-xl font-bold">
-                  <span onClick={()=>{if(orderCount<information.quantity){setOrderCount(t=>t+1)}}} className="cursor-pointer hover:text-blue-400 transition">+</span>
+                  <span onClick={()=>{if(orderCount<information.quantity){setOrderCount(t=>t+1)};dispatch(addToCart(information));}} className="cursor-pointer hover:text-blue-400 transition">+</span>
                   <span>{orderCount}</span>
-                  <span onClick={()=>{if(orderCount>1){setOrderCount(t=>t-1)}}}  className="cursor-pointer hover:text-blue-400 transition">-</span>
+                  <span onClick={()=>{if(orderCount>1){setOrderCount(t=>t-1)};dispatch(removeFromCart(information))}}  className="cursor-pointer hover:text-blue-400 transition">-</span>
                 </div>
                 <div onClick={()=>setOrderCount(0)} className="flex justify-center items-center w-[25%] bg-red-400 h-full rounded-lg text-2xl text-white cursor-pointer hover:bg-red-300 transition"><RiDeleteBin6Fill/></div>
               </div>
