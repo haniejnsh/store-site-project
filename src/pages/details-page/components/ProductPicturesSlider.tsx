@@ -1,33 +1,3 @@
-// import { Swiper, SwiperSlide } from 'swiper/react';
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import { Navigation } from 'swiper/modules';
-
-// export function ProductPicturesSlider({pictures}) {
-
-
-//   return (
-//     <Swiper
-//       style={{ width: '100%', height: '100%', padding: "12px 50px" }}
-//       modules={[Navigation]}
-//       spaceBetween={50} // فاصله بین اسلایدها
-//       slidesPerView={1}
-//       navigation
-//       loop={false}  // غیرفعال کردن لوپ
-//       className="rounded-xs "
-//     >
-//       {pictures.map((pic, index) => (
-//         <SwiperSlide 
-//           key={index}
-//            // اضافه کردن پدینگ چپ و راست به اسلایدها
-//         >
-//           <img src={`http://${pic}`} alt={`Slide ${index + 1}`} className="w-full" />
-//         </SwiperSlide>
-//       ))}
-//     </Swiper>
-//   );
-// }
-
 import { useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
