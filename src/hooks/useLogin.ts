@@ -18,6 +18,8 @@ export default function useLogin(rol) {
       
     },
     onSuccess: (data) => {
+      const roleApi=(rol=="کاربر")?"USER":"ADMIN"
+      if(roleApi==data.data.user.role){
         localStorage.setItem("access", data.token.accessToken);
         localStorage.setItem("refresh", data.token.refreshToken);
         localStorage.setItem("role", data.data.user.role);
@@ -37,6 +39,14 @@ export default function useLogin(rol) {
             className:"w-[350px] bg-blue-50 border border-blue-100 text-gray-500"
           })
         }
+      }
+      else{
+        toast({
+          description: "مشخصات شما با درخواستتان تطابق ندارد",
+          duration: 2500,
+          className:"w-[350px] bg-red-50 border border-red-100 text-gray-500"
+        })
+      }
       },
   });
 
