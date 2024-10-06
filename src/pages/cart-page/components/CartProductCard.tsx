@@ -6,7 +6,7 @@ export default function CartProductCard() {
     const newPrice=useNumberConverter(Number(8500000-(8500000*(3/100))))
     const [orderCount,setOrderCount]=useState(1)
   return (
-    <div className="flex border px-2 py-3 items-center rounded-lg  border-bl2 gap-2">
+    <div className="flex border px-2 py-3 items-center rounded-lg  border-bl2 gap-2 text-gray-500 shadow-lg shadow-bl1 h-28">
 
         <div className="flex w-[10%] max-w-24 min-w-12"><img src={"http://localhost:8000/images/products/images/products-66f90052a4c4996cc5eae8c0-1727594578635-1.webp"} alt="order" className="w-full h-full"/></div>
 
