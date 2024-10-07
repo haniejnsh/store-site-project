@@ -5,7 +5,7 @@ import { addToCart,removeAllFromCart,removeFromCart } from "@/redux/cart/cartSli
 
 export default function CartPage() {
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((store) => store.cart);
+  const { cartItems,totalPrice,totalDiscount } = useSelector((store) => store.cart);
   console.log("button cartitems2: ",cartItems);
   return (
     <div className="w-[80%] flex flex-col mx-auto py-8">
@@ -18,7 +18,7 @@ export default function CartPage() {
           <CartProductCard/> */}
         </div>
         <div className="flex flex-col w-[25%]">
-          <PaymentCard/>
+          <PaymentCard totalPrice={totalPrice} totalDiscount={totalDiscount}/>
           <div className="bg-blue-500 flex justify-center items-center rounded-lg text-white h-14 hover:bg-blue-400 mt-4 text-lg font-bold shadow-inner shadow-blue-200 cursor-pointer transition">ثبت سفارش</div>
         </div>
       </div>
