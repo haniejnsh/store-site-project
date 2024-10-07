@@ -17,20 +17,32 @@ export default function CartProductCard({product,remove,add,removeAll}) {
         <NavLink to={`/details/:${product._id}`} className="flex w-[45%] font-bold mr-3 hover:text-gray-400 transition">{product.name}</NavLink>
 
         <div className="flex flex-col w-[25%] px-3">
+          {(product.discount)?(
+            <>
             <div className="flex justify-center gap-2 items-center">
-                <p className="flex text-sm text-white bg-red-500 justify-center items-center w-8 h-5 rounded-md">
-                  <span>{useNumberConverter(product.discount)}</span>
-                  <span>%</span>
-                </p>
-                <p className="flex gap-1 items-center">
-                  <span className="font-bold text-md">{newPrice}</span>
-                  <span className="w-8 text-sm">تومان</span>
-                </p>
+              <p className="flex text-sm text-white bg-red-500 justify-center items-center w-8 h-5 rounded-md">
+                <span>{useNumberConverter(product.discount)}</span>
+                <span>%</span>
+              </p>
+              <p className="flex gap-1 items-center">
+                <span className="font-bold text-md">{newPrice}</span>
+                <span className="w-8 text-sm">تومان</span>
+              </p>
             </div>
             <div className="flex justify-center">
-                <span className="line-through text-gray-400 text-md">{useNumberConverter(product.price)}</span>
-                {/* <span className="w-9"></span> */}
+              <span className="line-through text-gray-400 text-md">{useNumberConverter(product.price)}</span>
             </div>
+            </>
+            ):(
+              <div className="flex justify-center items-center">
+                <p className="flex gap-1 items-center">
+                  <span className="font-bold text-md">{useNumberConverter(product.price)}</span>
+                  <span className="w-8 text-sm">تومان</span>
+                </p>
+              </div>
+            )}
+            
+            
         </div>
 
         <div className="flex justify-center items-center h-full max-h-10 gap-2 w-[20%] px-2">
