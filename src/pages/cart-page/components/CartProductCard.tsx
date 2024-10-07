@@ -3,10 +3,10 @@ import { useState } from "react"
 import { RiDeleteBin6Fill } from "react-icons/ri"
 import { NavLink } from "react-router-dom"
 
-export default function CartProductCard({product,remove,add}) {
+export default function CartProductCard({product,remove,add,removeAll}) {
     const newPrice=useNumberConverter(Number(product.price-(product.price*(product.discount/100))))
     const [orderCount,setOrderCount]=useState(product.qty)
-    const { qty, ...newObject } = product;
+    const { qty, ...newProduct } = product;
   return (
     <div className="flex border px-2 py-3 items-center rounded-lg  border-bl2 gap-2 text-gray-500 shadow-lg shadow-bl1 h-28">
 
@@ -33,11 +33,11 @@ export default function CartProductCard({product,remove,add}) {
 
         <div className="flex justify-center items-center h-full max-h-10 gap-2 w-[20%] px-2">
             <div className="flex items-center w-[75%] border border-bl2 rounded-lg h-full justify-around text-lg font-bold">
-                <span onClick={()=>{if(orderCount<10){setOrderCount(t=>t+1)};add(newObject)}} className="cursor-pointer hover:text-blue-400 transition">+</span>
+                <span onClick={()=>{if(orderCount<10){setOrderCount(t=>t+1)};add(newProduct)}} className="cursor-pointer hover:text-blue-400 transition">+</span>
                 <span>{orderCount}</span>
-                <span onClick={()=>{if(orderCount>1){setOrderCount(t=>t-1)};remove(newObject)}}  className="cursor-pointer hover:text-blue-400 transition">-</span>
+                <span onClick={()=>{if(orderCount>1){setOrderCount(t=>t-1)};remove(newProduct)}}  className="cursor-pointer hover:text-blue-400 transition">-</span>
             </div>
-            <div onClick={()=>setOrderCount(0)} className="flex justify-center items-center w-[25%] bg-red-400 h-full rounded-lg text-xl text-white cursor-pointer hover:bg-red-300 transition"><RiDeleteBin6Fill/></div>
+            <div onClick={()=>{setOrderCount(0);removeAll(newProduct)}} className="flex justify-center items-center w-[25%] bg-red-400 h-full rounded-lg text-xl text-white cursor-pointer hover:bg-red-300 transition"><RiDeleteBin6Fill/></div>
         </div>
 
     </div>

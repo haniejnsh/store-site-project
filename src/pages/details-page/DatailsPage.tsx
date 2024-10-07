@@ -12,7 +12,7 @@ import { ProductPicturesSlider } from "./components/ProductPicturesSlider";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { useNumberConverter } from "@/hooks/useNumberConverter";
 import { useDispatch,useSelector } from "react-redux";
-import { addToCart, removeFromCart } from "@/redux/cart/cartSlice";
+import { addToCart, removeAllFromCart, removeFromCart } from "@/redux/cart/cartSlice";
 
 export default function DatailsPage() {
   // const loc=useLocation()
@@ -22,12 +22,15 @@ export default function DatailsPage() {
   const product=params.productId.slice(1)
   console.log("param",product)
   const {isLoading,data,isError,error, refetch}=useGetReactQuery(`${PRODUCT_URL}/${product}`)
-  const [orderCount,setOrderCount]=useState(0)
+  const dispatch = useDispatch();
+  const { cartItems } = useSelector((store) => store.cart);
+  let startCount=0
+  cartItems.forEach(i=>{if(i._id==product){startCount=i.qty}})
+  const [orderCount,setOrderCount]=useState(startCount)
   const [interested,setInterested]=useState(false)
   const colors=["#021526","#686D76","#FFFFFF"]
   console.log(data);
-  const dispatch = useDispatch();
-  const { cartItems } = useSelector((store) => store.cart);
+  
   console.log("button cartitems: ",cartItems);
 
   useEffect(() => {
@@ -191,7 +194,7 @@ export default function DatailsPage() {
                   <span>{orderCount}</span>
                   <span onClick={()=>{if(orderCount>1){setOrderCount(t=>t-1)};dispatch(removeFromCart(information))}}  className="cursor-pointer hover:text-blue-400 transition">-</span>
                 </div>
-                <div onClick={()=>setOrderCount(0)} className="flex justify-center items-center w-[25%] bg-red-400 h-full rounded-lg text-2xl text-white cursor-pointer hover:bg-red-300 transition"><RiDeleteBin6Fill/></div>
+                <div onClick={()=>{setOrderCount(0);dispatch(removeAllFromCart(information));}} className="flex justify-center items-center w-[25%] bg-red-400 h-full rounded-lg text-2xl text-white cursor-pointer hover:bg-red-300 transition"><RiDeleteBin6Fill/></div>
               </div>
             )}
 

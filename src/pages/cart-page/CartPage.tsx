@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import CartProductCard from "./components/CartProductCard";
 import PaymentCard from "./components/PaymentCard";
-import { addToCart, removeFromCart } from "@/redux/cart/cartSlice";
+import { addToCart,removeAllFromCart,removeFromCart } from "@/redux/cart/cartSlice";
 
 export default function CartPage() {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export default function CartPage() {
       <div className="flex gap-4">
         <div className="flex flex-col gap-4 w-[75%]">
           {cartItems?.map(item=>{
-            return (<CartProductCard product={item} remove={(i) => dispatch(removeFromCart( i ))} add={(i) => dispatch(addToCart( i ))}/>)
+            return (<CartProductCard product={item} remove={(i) => dispatch(removeFromCart( i ))} removeAll={(i) => dispatch(removeAllFromCart( i ))} add={(i) => dispatch(addToCart( i ))}/>)
           })}
           {/* <CartProductCard/>
           <CartProductCard/> */}
