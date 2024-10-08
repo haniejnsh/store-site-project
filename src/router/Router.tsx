@@ -4,7 +4,6 @@ import HomePage from "../pages/home-page/HomePage";
 import DetailsPage from "../pages/details-page/DatailsPage";
 import CartPage from "../pages/cart-page/CartPage";
 import ShippingPage from "../pages/shipping-page/ShippingPage";
-import ResultPage from "../pages/result-page/ResultPage";
 import AdminPanelLayout from "../layouts/AdminPanelLayout";
 import ProductsManagementPage from "../pages/adminPanelPage/productsManagementPage/ProductsManagementPage";
 import OrdersManagementPage from "../pages/adminPanelPage/orders-management-page/OrdersManagementPage";
@@ -13,6 +12,8 @@ import UserLoginPage from "../pages/login-page/UserLoginPage";
 import AdminLoginPage from "../pages/login-page/AdminLoginPage";
 import UserRegisterPage from "../pages/register-page/UserRegisterPage";
 import ProductsListPage from "../pages/products-list-page/ProductsListPage";
+import SuccessfulResult from "@/pages/payment-result-page/SuccessfulResult";
+import UnsuccessfulResult from "@/pages/payment-result-page/UnsuccessfulResult";
 
 
 const routes: RouteObject[] = ([
@@ -41,8 +42,12 @@ const routes: RouteObject[] = ([
                 element:<ShippingPage/>
             },
             {
-                path:"/result",
-                element:<ResultPage/>
+                path:"/successful",
+                element:<SuccessfulResult/>
+            },
+            {
+                path:"/unsuccessful",
+                element:<UnsuccessfulResult/>
             }
         ]
     },
