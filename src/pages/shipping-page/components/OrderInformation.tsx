@@ -24,14 +24,19 @@ export default function OrderInformation({errorOrder}) {
     <div className="flex flex-col items-center border rounded-lg border-bl2 px-6 py-6 shadow-lg shadow-bl2 w-full text-gray-500">
         <h1 className="text-xl font-bold">اطلاعات سفارش</h1>
         <h2 className="w-full text-right font-bold pr-2 mt-8 mb-2">سفارشات :</h2>
-        <div className="flex flex-col w-full gap-2 bg-bl1 px-3 py-2 rounded-lg">
-            {cartItems.map(cart=>{
+        <div className="flex flex-col w-full gap-2  px-3 py-2 rounded-lg">
+            {cartItems.map((cart,index)=>{
                 return(
-                    <div className="flex justify-between">
-                        <p>{cart.name}</p>
-                        <p className="flex items-center gap-1">
+                    <div className="flex gap-2 text-gra">
+                        <p className="flex items-center">
+                            <span className="text-blue-400">{useNumberConverter(index+1)}</span>
+                            <span className="ml-1 text-blue-400">-</span>
+                            <span>{cart.name}</span>
+                            
+                        </p>
+                        <p className="flex items-center gap-1 text-blue-500">
                             <span><RxCross2 className="text-sm"/></span>
-                            <span >{cart.qty}</span>
+                            <span >{useNumberConverter(cart.qty)}</span>
                         </p>
                     </div>
                 )
@@ -92,7 +97,7 @@ export default function OrderInformation({errorOrder}) {
                 <span>قیمت کالاها</span>
                 <span>{useNumberConverter(totalPrice)}</span>
             </p> 
-            <p className="flex justify-between w-full mt-3 px-4">
+            <p className="flex justify-between w-full mt-6 px-4">
                 <span>تخفیف کالا</span>
                 <span>{useNumberConverter(totalDiscount)}</span>
             </p>
@@ -100,7 +105,7 @@ export default function OrderInformation({errorOrder}) {
                 <span>کد تخفیف</span>
                 <span>{useNumberConverter(offPrice)}</span>
             </p>
-            <p className="flex items-center justify-between w-full mt-6 px-4 text-green-300">
+            <p className="flex items-center justify-between w-full mt-6 px-4 text-green-400">
                 <span>مجموع سود شما</span>
                 <span>{useNumberConverter(offPrice+totalDiscount)}</span>
             </p>

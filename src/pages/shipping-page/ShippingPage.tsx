@@ -55,7 +55,7 @@ export default function ShippingPage() {
           </div>
           <div className="flex w-full items-center justify-center mt-8 gap-4 text-gray-500">
             <div onClick={()=>navigate("/cart")} className="bg-blue-500 flex justify-center items-center rounded-lg text-white  hover:bg-blue-400 text-lg font-bold shadow-inner shadow-blue-200 cursor-pointer transition w-40 py-2">برگشت به سبد خرید</div>
-            <button  onClick={handle} className="bg-blue-500 flex justify-center items-center rounded-lg text-white  hover:bg-blue-400 text-lg font-bold shadow-inner shadow-blue-200 cursor-pointer transition w-40 py-2">پرداخت</button>
+            <a href="http://localhost:5175/"  onClick={handle} className="bg-blue-500 flex justify-center items-center rounded-lg text-white  hover:bg-blue-400 text-lg font-bold shadow-inner shadow-blue-200 cursor-pointer transition w-40 py-2">پرداخت</a>
           </div>
         </div>
       ):(
