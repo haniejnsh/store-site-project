@@ -12,7 +12,7 @@ export default function UserInformationForm({errorInformation}) {
     const handle=(values)=>{
         console.log("yeeeeessssssseeee");
         console.log('=', values.date);
-        errorInformation(false)
+        errorInformation({ isOk:true, valueSelected: values.date });
     }
     return (
         <Formik
@@ -46,7 +46,7 @@ export default function UserInformationForm({errorInformation}) {
                                     const value = e.target.value;
                                     setFieldValue("firstName", value);  
                                     setIsChecked(false);
-                                    errorInformation(true)
+                                    errorInformation((prev) => ({ ...prev, isOk:false }));
                                 }}/>   
                             </label>
                             <span className="text-red-700 text-xs text-start w-full pr-24 mb-5">{errors.firstName}</span>
@@ -57,7 +57,7 @@ export default function UserInformationForm({errorInformation}) {
                                     const value = e.target.value;
                                     setFieldValue("lastName", value); 
                                     setIsChecked(false);
-                                    errorInformation(true) 
+                                    errorInformation((prev) => ({ ...prev, isOk:false }));
                                 }}/>
                             </label>
                             <span className="text-red-700 text-xs text-start w-full pr-24 mb-5">{errors.lastName}</span>
@@ -68,7 +68,7 @@ export default function UserInformationForm({errorInformation}) {
                                     const value = e.target.value;
                                     setFieldValue("phone", value);  
                                     setIsChecked(false);
-                                    errorInformation(true)
+                                    errorInformation((prev) => ({ ...prev, isOk:false }));
                                 }}/>
                             </label>
                             <span className="text-red-700 text-xs text-start w-full pr-24 mb-5">{errors.phone}</span>
@@ -79,7 +79,7 @@ export default function UserInformationForm({errorInformation}) {
                                     const value = e.target.value;
                                     setFieldValue("address", value); 
                                     setIsChecked(false);
-                                    errorInformation(true) 
+                                    errorInformation((prev) => ({ ...prev, isOk:false })); 
                                 }}/>
                             </label>
                             <span className="text-red-700 text-xs text-start w-full pr-24 mb-5">{errors.address}</span>
@@ -93,7 +93,7 @@ export default function UserInformationForm({errorInformation}) {
                                         const isoDate = date?.toDate?.().toISOString();
                                         setFieldValue('date', isoDate);
                                         setIsChecked(false);
-                                        errorInformation(true)
+                                        errorInformation((prev) => ({ ...prev, isOk:false }));
                                     }}
                                     calendar={persian}
                                     minDate={today}
@@ -118,7 +118,7 @@ export default function UserInformationForm({errorInformation}) {
                                             
                                         }
                                         else{
-                                            errorInformation(true)
+                                            errorInformation((prev) => ({ ...prev, isOk:false }));
                                         }
                                     }}
                                     />

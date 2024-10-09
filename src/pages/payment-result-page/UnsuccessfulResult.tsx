@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 export default function UnsuccessfulResult() {
   const navigate =useNavigate()
+  localStorage.removeItem('additionalInformation');
+  
   return (
     <div className="flex flex-col items-center mx-auto w-full my-16">
       <FaExclamationTriangle className="text-9xl text-red-500"/>

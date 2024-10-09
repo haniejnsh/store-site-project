@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { RxCross2 } from "react-icons/rx";
 import { useNumberConverter } from "@/hooks/useNumberConverter";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdLocalShipping } from "react-icons/md";
 import { IoMdJet } from "react-icons/io";
 
@@ -15,11 +15,20 @@ export default function OrderInformation({errorOrder}) {
     setSelectedTransport(transport);
     if (transport === 'transport1') {
         setTransportPrice(100000)
+        // errorOrder((prev) => ({ ...prev, valueSelected:false }));
+        errorOrder({ isOk:true, valueSelected: 100000-offPrice })
     } else if (transport === 'transport2') {
         setTransportPrice(200000)
+        errorOrder({ isOk:true, valueSelected: 200000-offPrice })
     }
-    errorOrder(false)
+    console.log("transport",transportPrice)
+    // errorOrder(transportPrice)
   };
+  useEffect(() => {
+    errorOrder((prev) => ({ ...prev, valueSelected:transportPrice-offPrice }));
+  }, [offPrice]);
+//   errorOrder((prev) => ({ ...prev, valueSelected:transportPrice-offPrice }));
+//   errorOrder(transportPrice-offPrice);
   return (
     <div className="flex flex-col items-center border rounded-lg border-bl2 px-6 py-6 shadow-lg shadow-bl2 w-full text-gray-500">
         <h1 className="text-xl font-bold">اطلاعات سفارش</h1>
@@ -85,7 +94,7 @@ export default function OrderInformation({errorOrder}) {
         <h2 className="w-full text-right font-bold pr-2 mt-8 mb-2 border-t border-bl2 pt-4">کد تخفیف :</h2>
         
         {(offCode=="")?(
-            <input type="text" placeholder="کد تخفیف را وارد نمایید" onBlur={(e)=>{setOffCode(e.target.value);e.target.value=""}}  className=" w-[70%] h-10 px-2 rounded-lg border-2 border-bl2 focus:outline-none focus:border-blue-200 text-blue-500 placeholder:text-blue-300 placeholder:text-sm text-sm"/>
+            <input type="text" placeholder="کد تخفیف را وارد نمایید" onBlur={(e)=>{setOffCode(e.target.value);e.target.value="";}}  className=" w-[70%] h-10 px-2 rounded-lg border-2 border-bl2 focus:outline-none focus:border-blue-200 text-blue-500 placeholder:text-blue-300 placeholder:text-sm text-sm"/>
         ):(offCode=="hanie")?(
             <div onClick={()=>setOffCode("")} className="flex justify-center items-center bg-green-100 w-[70%] h-10 px-2 rounded-lg border-2 border-green-200 focus:outline-none focus:border-green-300 text-green-500 font-bold cursor-pointer">کد تخفیف اعمال شد</div>
         ):(

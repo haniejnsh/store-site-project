@@ -4,12 +4,15 @@ import { queryClient } from "@/lib/reactQuery";
 import { useToast } from "@/hooks/use-toast"
 // import { CATEGORY_URL} from "@/services/api";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { emptyCart } from "@/redux/cart/cartSlice";
 // import axios from "axios";
 
 
 export default function usePostReactQuery(urlPost:string) {
     // const navigate=useNavigate()
     const { toast } = useToast()
+    const dispatch = useDispatch();
     const navigate=useNavigate()
 
   const mutation= useMutation({
@@ -22,7 +25,7 @@ export default function usePostReactQuery(urlPost:string) {
     onSuccess: (data) => {
         console.log("data post category",data);
         queryClient.invalidateQueries("product")
-        navigate("/admin/productmanagement")
+        // navigate("/admin/productmanagement")
         if(urlPost=="/categories"){
           toast({
             description: "گروه محصول با موفقیت افزوده شد",
@@ -43,6 +46,11 @@ export default function usePostReactQuery(urlPost:string) {
             duration: 2500,
             className:"w-[350px] bg-blue-50 border border-blue-100 text-gray-500"
           })
+        }
+        else if(urlPost=="/orders"){
+          dispatch(emptyCart())
+          console.log("post order");
+          
         }
         
       },
