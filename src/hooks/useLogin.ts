@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "../services/baseService"
 import { AUTH_URL} from "@/services/api";
 import { useNavigate } from "react-router-dom";
-// import axios from "axios";
 import { useToast } from "@/hooks/use-toast"
 
 
@@ -13,11 +12,11 @@ export default function useLogin(rol) {
   const mutation= useMutation({
     mutationFn: async (infoUser) => {
       const res = await axios.post(`${AUTH_URL.login}`, infoUser);
-      console.log("res-log",res.data);
       return res.data;
       
     },
     onSuccess: (data) => {
+      console.log("data login :",data);
       const roleApi=(rol=="کاربر")?"USER":"ADMIN"
       if(roleApi==data.data.user.role){
         localStorage.setItem("access", data.token.accessToken);

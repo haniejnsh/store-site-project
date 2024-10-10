@@ -10,8 +10,6 @@ export default function UserInformationForm({errorInformation}) {
     const [isChecked, setIsChecked] = useState(false);
     const today = new Date();
     const handle=(values)=>{
-        console.log("yeeeeessssssseeee");
-        console.log('=', values.date);
         errorInformation({ isOk:true, valueSelected: values.date });
     }
     return (

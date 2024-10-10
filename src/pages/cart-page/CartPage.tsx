@@ -9,7 +9,6 @@ export default function CartPage() {
   const dispatch = useDispatch();
   const { cartItems,totalPrice,totalDiscount } = useSelector((store) => store.cart);
   const navigate=useNavigate()
-  console.log("button cartitems2: ",cartItems);
   return (
     <div className="w-[80%] flex flex-col mx-auto py-8">
       {(totalPrice)?(

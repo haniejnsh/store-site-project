@@ -14,7 +14,6 @@ export default function SuccessfulResult() {
     product:_id,
     count:qty
   }));
-  // console.log(cartItem);
   
   const order={
     user: userLocal._id,
@@ -23,7 +22,6 @@ export default function SuccessfulResult() {
     deliveryStatus: false,
     sideCost:addInfoLocal?.deliveryDate?.addPrice
   }
-  console.log("order",order);
   useEffect(() => {
     if(cartLocal != []){
       mutate(order);

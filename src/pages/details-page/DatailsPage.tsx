@@ -192,7 +192,7 @@ export default function DatailsPage() {
                 <div className="flex items-center w-[75%] border border-bl2 rounded-lg h-full justify-around text-xl font-bold">
                   <span onClick={()=>{if(orderCount<information.quantity){setOrderCount(t=>t+1)};dispatch(addToCart(information));}} className="cursor-pointer hover:text-blue-400 transition">+</span>
                   <span>{orderCount}</span>
-                  <span onClick={()=>{if(orderCount>1){setOrderCount(t=>t-1)};dispatch(removeFromCart(information))}}  className="cursor-pointer hover:text-blue-400 transition">-</span>
+                  <span onClick={()=>{if(orderCount>0){setOrderCount(t=>t-1)};dispatch(removeFromCart(information))}}  className="cursor-pointer hover:text-blue-400 transition">-</span>
                 </div>
                 <div onClick={()=>{setOrderCount(0);dispatch(removeAllFromCart(information));}} className="flex justify-center items-center w-[25%] bg-red-400 h-full rounded-lg text-2xl text-white cursor-pointer hover:bg-red-300 transition"><RiDeleteBin6Fill/></div>
               </div>

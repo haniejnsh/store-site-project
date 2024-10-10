@@ -2,8 +2,11 @@ import { FaCartShopping } from "react-icons/fa6";
 import MainSearch from "../common/MainSearch";
 import logo from "../../assets/images/logo-hanie.jpeg"
 import { NavLink } from "react-router-dom";
+import { useNumberConverter } from "@/hooks/useNumberConverter";
+import { useSelector } from "react-redux";
 
 export default function TopHeader() {
+  const { totalNumber} = useSelector((store) => store.cart);
   return (
     <div className="flex border-b-[2px] border-bl2 items-center justify-center w-[95%] px-12 py-1 mx-auto gap-10">
       <NavLink to="/" className="w-[130px] cursor-pointer ml-10">
@@ -14,7 +17,15 @@ export default function TopHeader() {
         <NavLink to="/userlogin" className="border-l-2 border-bl2  w-[80px] flex justify-center items-center py-3 cursor-pointer hover:text-white hover:bg-blue-300 rounded-r-xl transition">ورود کاربر</NavLink>
         <NavLink to="/adminlogin" className="w-[80px] flex justify-center items-center py-3 cursor-pointer hover:text-white hover:bg-blue-300 rounded-l-xl transition">ورود مدیریت</NavLink>
       </div>
-      <NavLink to="/cart" className="border border-bl2  flex justify-center items-center p-2 rounded-lg text-gray-400 hover:text-blue-300 cursor-pointer transition"><FaCartShopping className="text-2xl  "/></NavLink>
+      <NavLink to="/cart" className="border border-bl2  flex justify-center items-center p-2 rounded-lg text-gray-400 hover:text-blue-300 cursor-pointer transition relative">
+        <FaCartShopping className="text-2xl  "/>
+        {totalNumber?(
+          <span className="absolute -bottom-[2px] -left-2 bg-blue-400 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
+          {useNumberConverter(totalNumber)}
+         </span>):""
+        }
+        
+      </NavLink>
 
     </div>
   )

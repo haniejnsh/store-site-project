@@ -15,20 +15,17 @@ export default function OrderInformation({errorOrder}) {
     setSelectedTransport(transport);
     if (transport === 'transport1') {
         setTransportPrice(100000)
-        // errorOrder((prev) => ({ ...prev, valueSelected:false }));
         errorOrder({ isOk:true, valueSelected: 100000-offPrice })
     } else if (transport === 'transport2') {
         setTransportPrice(200000)
         errorOrder({ isOk:true, valueSelected: 200000-offPrice })
     }
-    console.log("transport",transportPrice)
-    // errorOrder(transportPrice)
+  
   };
   useEffect(() => {
     errorOrder((prev) => ({ ...prev, valueSelected:transportPrice-offPrice }));
   }, [offPrice]);
-//   errorOrder((prev) => ({ ...prev, valueSelected:transportPrice-offPrice }));
-//   errorOrder(transportPrice-offPrice);
+
   return (
     <div className="flex flex-col items-center border rounded-lg border-bl2 px-6 py-6 shadow-lg shadow-bl2 w-full text-gray-500">
         <h1 className="text-xl font-bold">اطلاعات سفارش</h1>
@@ -51,14 +48,6 @@ export default function OrderInformation({errorOrder}) {
                 )
             })}
         </div>
-        {/* <p className="flex justify-between w-full mt-6 px-4">
-            <span>قیمت کالاها</span>
-            <span>{useNumberConverter(totalPrice)}</span>
-        </p>
-        <p className="flex justify-between w-full mt-3 px-4">
-            <span>تخفیف</span>
-            <span>{useNumberConverter(totalDiscount)}</span>
-        </p> */}
         <h2 className="w-full text-right font-bold pr-2 mt-8 mb-2 border-t border-bl2 pt-4">ارسال :</h2>
         <div className="flex flex-col justify-between w-full mt-2 pr-4 pl-8">
             <div className="flex justify-between">

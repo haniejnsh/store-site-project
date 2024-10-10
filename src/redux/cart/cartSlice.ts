@@ -5,6 +5,7 @@ const initialState = {
   cartItems: localCart,
   totalPrice: localCart.length > 0 ? localCart.reduce((acc, item) => acc + (item.price*item.qty), 0) : 0,
   totalDiscount:localCart.length > 0 ? localCart.reduce((acc, item) => acc + item.qty*(item.price*(item.discount/100)), 0) : 0,
+  totalNumber:localCart.length,
 };
 const cartSlice = createSlice({
     name: "cart",
@@ -13,17 +14,17 @@ const cartSlice = createSlice({
         addToCart: (state, action) => {
 
             const selected = action.payload;
-            console.log("action : ",action.payload);
             const exist = state.cartItems.find((item) => item._id === selected._id);
             if (exist) {
                 exist.qty += 1;
             } else {
                 state.cartItems.push({ ...selected, qty: 1 });
+                state.totalNumber+=1
             }
             state.totalPrice += selected.price
             state.totalDiscount += selected.price*(selected.discount/100)
             localStorage.setItem('cart', JSON.stringify(state.cartItems))
-            // console.log("action2 : ",exist);
+    
         },
         removeFromCart: (state, action) => {
             const selected = action.payload;
@@ -32,6 +33,7 @@ const cartSlice = createSlice({
               state.cartItems = state.cartItems.filter(
                 (item) => item._id !== selected._id
               );
+              state.totalNumber-=1
             } else {
               exist.qty -= 1;
             }
@@ -50,8 +52,7 @@ const cartSlice = createSlice({
           state.cartItems = state.cartItems.filter(
             (item) => item._id !== selected._id
           );
-          
-          // state.totalPrice -= selected.price*state.cartItems
+          state.totalNumber-=1
           localStorage.setItem('cart', JSON.stringify(state.cartItems));
         },
 
@@ -59,6 +60,7 @@ const cartSlice = createSlice({
           state.cartItems=[]
           state.totalPrice = 0
           state.totalDiscount = 0
+          state.totalNumber=0
           localStorage.removeItem('cart');
         },
     },

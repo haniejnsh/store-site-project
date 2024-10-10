@@ -11,16 +11,10 @@ export default function ShippingPage() {
   const [errorOrder,setErrorOrder]=useState({ isOk:false, valueSelected:"" })
   const { toast } = useToast()
   const navigate=useNavigate()
-  // if(!errorInformation && !errorOrder){
-  //   setDisable(false)
-  // }
-  console.log("disable : ",errorInformation,"  and :",errorOrder);
   
   const handle=()=>{
     
     if(errorInformation.isOk && errorOrder.isOk){
-      console.log("submit");
-      console.log("disable : ",errorInformation," and ",errorOrder);
       const orderAdditionalInformation={
         addPrice:errorOrder.valueSelected,
         deliveryDate:errorInformation.valueSelected
