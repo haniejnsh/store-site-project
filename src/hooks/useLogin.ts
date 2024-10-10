@@ -31,7 +31,7 @@ export default function useLogin(rol) {
           })
         }
         else if(data.data.user.role=="USER"){
-          // navigate("/admin/productmanagement")
+          navigate("/")
           localStorage.setItem('user', JSON.stringify(data.data.user))
           toast({
             description: "شما با موفقیت به حساب کاربری خود وارد شدید",
