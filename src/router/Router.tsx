@@ -12,8 +12,7 @@ import UserLoginPage from "../pages/login-page/UserLoginPage";
 import AdminLoginPage from "../pages/login-page/AdminLoginPage";
 import UserRegisterPage from "../pages/register-page/UserRegisterPage";
 import ProductsListPage from "../pages/products-list-page/ProductsListPage";
-import SuccessfulResult from "@/pages/payment-result-page/SuccessfulResult";
-import UnsuccessfulResult from "@/pages/payment-result-page/UnsuccessfulResult";
+import PaymentResult from "@/pages/payment-result-page/PaymentResult";
 
 
 const routes: RouteObject[] = ([
@@ -42,12 +41,8 @@ const routes: RouteObject[] = ([
                 element:<ShippingPage/>
             },
             {
-                path:"/successful",
-                element:<SuccessfulResult/>
-            },
-            {
-                path:"/unsuccessful",
-                element:<UnsuccessfulResult/>
+                path:"/result",
+                element:<PaymentResult/>
             }
         ]
     },

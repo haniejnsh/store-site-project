@@ -44,6 +44,7 @@ export default function ProductsListPage() {
     }
   }, [data]);
   
+  
   useEffect(() => {
     setSearchParams((prev) => {
       const newParams = new URLSearchParams(prev);
