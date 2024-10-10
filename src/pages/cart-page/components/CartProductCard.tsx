@@ -2,6 +2,7 @@ import { useNumberConverter } from "@/hooks/useNumberConverter"
 import { useState } from "react"
 import { RiDeleteBin6Fill } from "react-icons/ri"
 import { NavLink } from "react-router-dom"
+import OrderRemoveModal from "./OrderRemoveModal"
 
 export default function CartProductCard({product,remove,add,removeAll}) {
     const newPrice=useNumberConverter(Number(product.price-(product.price*(product.discount/100))))
@@ -51,7 +52,10 @@ export default function CartProductCard({product,remove,add,removeAll}) {
                 <span>{product.qty}</span>
                 <span onClick={()=>{remove(newProduct)}}  className="cursor-pointer hover:text-blue-400 transition">-</span>
             </div>
-            <div onClick={()=>{removeAll(newProduct)}} className="flex justify-center items-center w-[25%] bg-red-400 h-full rounded-lg text-xl text-white cursor-pointer hover:bg-red-300 transition"><RiDeleteBin6Fill/></div>
+            <div className="">
+              <OrderRemoveModal removeAll={removeAll} order={newProduct}/>
+            </div>
+            
         </div>
 
     </div>
