@@ -5,6 +5,7 @@ import PaginationHook from "@/components/common/Pagination";
 import { useEffect, useState } from "react";
 import * as shamsi from 'shamsi-date-converter';
 import { ImSad2 } from "react-icons/im";
+import OrderInformationModal from "./OrderInformationModal";
 
 export default function OrdersManagementTable({filterUrl}) {
   const [pageCounter,setPageCounter]=useState(1)
@@ -75,7 +76,8 @@ export default function OrdersManagementTable({filterUrl}) {
                 {shamsi.gregorianToJalali(order.createdAt).join('/')}
                 </TableCell>
                 <TableCell className="text-center w-[25%] text-gray-500">
-                <span className="hover:text-blue-300 cursor-pointer transition text-blue-400 text-lg">مشاهده سفارش</span>
+                  <OrderInformationModal infoOrder={order}/>
+                {/* <span className="hover:text-blue-300 cursor-pointer transition text-blue-400 text-lg">مشاهده سفارش</span> */}
                 </TableCell>
             </TableRow>
           )

@@ -8,6 +8,7 @@ export default function DeleteModal({idPro,namePro,titleModal,url}) {
         // alert("modal delete")
         mutate(idPro)
     }
+    
     return (
         <div className="">
             <AlertDialog>
